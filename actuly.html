@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Эко-факты: Веришь или нет?</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #4CAF50;
+    --accent: #76FF03;
+    --dark: #0a0f0a;
+    --mid: #1a2a1a;
+    --text: #e8f5e9;
+    --warn: #FF6B35;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 40px 20px;
+  }
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px; letter-spacing: 6px;
+    color: var(--accent); margin-bottom: 32px;
+    opacity: 0.7;
+  }
+  .card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(76,205,80,0.2);
+    border-radius: 24px; padding: 32px;
+    max-width: 520px; width: 100%;
+  }
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px; letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+  .subtitle {
+    font-size: 13px; color: rgba(255,255,255,0.4);
+    letter-spacing: 2px; font-family: 'Space Mono', monospace;
+    margin-bottom: 28px;
+  }
+  .fio-input {
+    width: 100%; background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(76,205,80,0.25);
+    border-radius: 12px; padding: 14px 18px;
+    color: var(--text); font-family: 'Montserrat', sans-serif;
+    font-size: 16px; outline: none; transition: border-color 0.2s;
+    margin-bottom: 28px;
+  }
+  .fio-input:focus { border-color: var(--accent); }
+  .facts-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px; letter-spacing: 2px;
+    color: var(--accent); margin-bottom: 20px;
+  }
+  .fact-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px; padding: 16px 18px;
+    margin-bottom: 14px;
+    transition: all 0.3s;
+  }
+  .fact-item.answered { border-color: rgba(76,205,80,0.35); }
+  .fact-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px; color: var(--accent);
+    letter-spacing: 3px; margin-bottom: 6px;
+  }
+  .fact-text {
+    font-size: 14px; line-height: 1.65;
+    color: rgba(255,255,255,0.82); margin-bottom: 14px;
+  }
+  .fact-btns {
+    display: flex; gap: 10px;
+  }
+  .fact-btn {
+    flex: 1; padding: 10px;
+    border-radius: 10px; border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.04);
+    color: var(--text); font-family: 'Montserrat', sans-serif;
+    font-weight: 600; font-size: 13px; cursor: pointer; transition: all 0.2s;
+    letter-spacing: 1px;
+  }
+  .fact-btn:hover { background: rgba(76,205,80,0.1); border-color: var(--accent); }
+  .fact-btn.selected-yes { background: rgba(76,205,80,0.2); border-color: var(--accent); color: var(--accent); }
+  .fact-btn.selected-no  { background: rgba(255,100,100,0.15); border-color: rgba(255,100,100,0.5); color: #ff9090; }
+  .result-wrap {
+    margin-top: 12px; padding: 12px 14px;
+    border-radius: 10px; font-size: 13px;
+    display: none; line-height: 1.5;
+  }
+  .result-wrap.correct { background: rgba(76,205,80,0.1); border: 1px solid rgba(76,205,80,0.3); color: var(--accent); }
+  .result-wrap.wrong   { background: rgba(255,100,100,0.1); border: 1px solid rgba(255,100,100,0.3); color: #ff9090; }
+  .submit-btn {
+    width: 100%; margin-top: 28px;
+    background: var(--accent); color: #000;
+    border: none; border-radius: 14px;
+    padding: 16px; font-family: 'Montserrat', sans-serif;
+    font-weight: 900; font-size: 15px; letter-spacing: 2px;
+    cursor: pointer; transition: all 0.25s;
+  }
+  .submit-btn:hover { background: #9fff40; transform: translateY(-2px); }
+  .submit-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+  .success-screen {
+    display: none; text-align: center; padding: 20px 0;
+  }
+  .success-icon { font-size: 64px; margin-bottom: 16px; }
+  .success-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 40px; color: var(--accent); letter-spacing: 2px;
+  }
+  .success-score {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px; color: #fff; line-height: 1;
+    margin: 8px 0;
+  }
+  .success-sub { font-size: 14px; color: rgba(255,255,255,0.5); letter-spacing: 2px; }
+  .progress-bar {
+    width: 100%; height: 4px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 2px; margin-bottom: 24px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; background: var(--accent);
+    width: 0%; transition: width 0.4s;
+    border-radius: 2px;
+  }
+  .error-msg { color: #ff9090; font-size: 13px; margin-top: -20px; margin-bottom: 12px; display: none; }
+</style>
+</head>
+<body>
+<div class="logo">ЭКО-УРБАНИСТИКА · АКТУАЛИЗАЦИЯ ЗНАНИЙ</div>
+
+<div class="card" id="mainCard">
+  <h1><a href="index.html" style="color: white; text-decoration: none;">ВЕРИШЬ ИЛИ НЕТ?</a></h1>
+  <div class="subtitle">БЛОК 3 · 5 ЭКО-ФАКТОВ</div>
+
+  <input type="text" class="fio-input" id="fioInput" placeholder="Введи своё ФИО" maxlength="80">
+  <div class="error-msg" id="errMsg">Пожалуйста, введи своё ФИО</div>
+
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="facts-title">📋 ФАКТЫ</div>
+
+  <div id="factsWrap"></div>
+
+  <button class="submit-btn" id="submitBtn" onclick="submitAnswers()">ОТПРАВИТЬ ОТВЕТЫ</button>
+</div>
+
+<div class="card success-screen" id="successCard">
+  <div class="success-icon">🌿</div>
+  <div class="success-title">ОТЛИЧНО!</div>
+  <div class="success-score" id="scoreDisplay">0/5</div>
+  <div class="success-sub">ПРАВИЛЬНЫХ ОТВЕТОВ</div>
+  <p style="margin-top:20px;font-size:14px;color:rgba(255,255,255,0.5);line-height:1.7;">
+    Твои ответы отправлены преподавателю.<br>Посмотри на экран — результаты появятся на доске!
+  </p>
+  <div style="margin-top:24px;font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:3px;">
+    ✓ ДАННЫЕ СОХРАНЕНЫ
+  </div>
+</div>
+
+<!-- Google Apps Script URL — замените на свой -->
+<script>
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbydk_9Ks0spHtkemP0AY-jBBrqQoQUYh9ISLD_27ubk5HPb49ktjFipFJlH7J9TGww-Zw/exec';
+
+const facts = [
+  {
+    id: 1,
+    text: 'Одно взрослое дерево за сутки вырабатывает столько кислорода, сколько необходимо для дыхания трёх человек.',
+    answer: true,
+    explain: '✓ Правда! Взрослое лиственное дерево производит ~100 кг кислорода в год.'
+  },
+  {
+    id: 2,
+    text: 'В крупных городах температура воздуха всегда на 3–5 градусов выше, чем в пригороде.',
+    answer: true,
+    explain: '✓ Правда! Это называется эффект «острова тепла» — бетон и асфальт поглощают и удерживают тепло.'
+  },
+  {
+    id: 3,
+    text: 'Искусственный интеллект уже сегодня умеет предсказывать уровень смога в городе на три дня вперёд с точностью 90%.',
+    answer: true,
+    explain: '✓ Правда! Нейросети анализируют данные со спутников, датчиков и метеостанций.'
+  },
+  {
+    id: 4,
+    text: 'Из-за обилия асфальта и бетона температура в центре мегаполисов летом может быть на 10–15°C выше, чем в пригородах.',
+    answer: true,
+    explain: '✓ Правда! На тепловых картах центр города выглядит как пылающее красное пятно.'
+  },
+  {
+    id: 5,
+    text: 'В некоторых мегаполисах на крышах высаживают целые луга с дикими цветами специально для спасения городских пчёл.',
+    answer: true,
+    explain: '✓ Правда! Это практикуется в Лондоне, Копенгагене, Сингапуре.'
+  }
+];
+
+let userAnswers = {};
+
+function renderFacts() {
+  const wrap = document.getElementById('factsWrap');
+  wrap.innerHTML = facts.map((f, i) => `
+    <div class="fact-item" id="fact-${f.id}">
+      <div class="fact-num">ФАКТ №${f.id}</div>
+      <div class="fact-text">${f.text}</div>
+      <div class="fact-btns">
+        <button class="fact-btn" id="yes-${f.id}" onclick="answerFact(${f.id}, true)">✅ ДА, ВЕРЮ</button>
+        <button class="fact-btn" id="no-${f.id}"  onclick="answerFact(${f.id}, false)">❌ НЕТ</button>
+      </div>
+      <div class="result-wrap" id="result-${f.id}"></div>
+    </div>
+  `).join('');
+  updateProgress();
+}
+
+function answerFact(id, val) {
+  userAnswers[id] = val;
+  const fact = facts.find(f => f.id === id);
+  const isCorrect = val === fact.answer;
+
+  document.getElementById(`yes-${id}`).className = 'fact-btn' + (val === true ? ' selected-yes' : '');
+  document.getElementById(`no-${id}`).className  = 'fact-btn' + (val === false ? ' selected-no' : '');
+  document.getElementById(`fact-${id}`).classList.add('answered');
+
+  const resEl = document.getElementById(`result-${id}`);
+  resEl.className = 'result-wrap ' + (isCorrect ? 'correct' : 'wrong');
+  resEl.textContent = isCorrect ? fact.explain : `✗ Неверно. ${fact.explain}`;
+  resEl.style.display = 'block';
+
+  updateProgress();
+}
+
+function updateProgress() {
+  const count = Object.keys(userAnswers).length;
+  document.getElementById('progressFill').style.width = (count / facts.length * 100) + '%';
+}
+
+function submitAnswers() {
+  const fio = document.getElementById('fioInput').value.trim();
+  if (!fio) {
+    document.getElementById('errMsg').style.display = 'block';
+    return;
+  }
+  document.getElementById('errMsg').style.display = 'none';
+  document.getElementById('submitBtn').disabled = true;
+  document.getElementById('submitBtn').textContent = 'ОТПРАВЛЯЮ...';
+
+  const score = facts.filter(f => userAnswers[f.id] === f.answer).length;
+
+  // Send to Google Apps Script
+  const payload = {
+    action: 'submit',
+    sheet: '1',
+    fio,
+    score,
+    answers: JSON.stringify(userAnswers),
+    timestamp: new Date().toISOString()
+  };
+
+  fetch(GAS_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(() => {});
+
+  // Show success
+  setTimeout(() => {
+    document.getElementById('mainCard').style.display = 'none';
+    document.getElementById('scoreDisplay').textContent = score + '/5';
+    document.getElementById('successCard').style.display = 'block';
+  }, 800);
+}
+
+renderFacts();
+</script>
+</body>
+</html>

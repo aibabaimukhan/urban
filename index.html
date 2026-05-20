@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Эко-урбанистика: город, в котором хочется жить</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #4CAF50;
+    --lime: #8BC34A;
+    --dark: #0a0f0a;
+    --mid: #1a2a1a;
+    --accent: #76FF03;
+    --warm: #FF6B35;
+    --gold: #FFD700;
+    --text: #e8f5e9;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--dark); color: var(--text); font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+
+  /* ===== BLOCK 1: HERO VIDEOS ===== */
+  #block1 {
+    width: 100vw; height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    position: relative; overflow: hidden;
+  }
+  .video-panel {
+    position: relative; overflow: hidden;
+  }
+  .video-panel video {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%; object-fit: cover;
+    display: block;
+  }
+  .video-label {
+    position: absolute; bottom: 24px; left: 0; right: 0;
+    text-align: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px; letter-spacing: 4px;
+    color: rgba(255,255,255,0.85);
+    text-shadow: 0 2px 12px rgba(0,0,0,0.8);
+    pointer-events: none;
+  }
+  .video-panel:first-child .video-label { color: #bbb; }
+  .video-panel:last-child .video-label { color: var(--accent); }
+  .hero-divider {
+    position: absolute; left: 50%; top: 0; bottom: 0;
+    width: 4px; background: var(--accent);
+    transform: translateX(-50%);
+    z-index: 10;
+    box-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent);
+  }
+  .scroll-hint {
+    position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+    z-index: 20; display: flex; flex-direction: column; align-items: center; gap: 6px;
+    animation: bounce 2s infinite;
+  }
+  .scroll-hint span { font-size: 11px; letter-spacing: 3px; color: var(--accent); }
+  .scroll-hint svg { width: 24px; height: 24px; stroke: var(--accent); }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+  /* ===== BLOCK 2: THEME VIDEO ===== */
+  #block2 {
+    width: 100vw; height: 100vh;
+    position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  #block2 video {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    z-index: 1;
+  }
+  #block2 .overlay {
+    position: absolute; inset: 0; z-index: 2;
+    background: rgba(0,0,0,0.45);
+  }
+  .theme-content {
+    position: relative; z-index: 3;
+    text-align: center;
+  }
+  .theme-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px; letter-spacing: 6px; color: var(--accent);
+    margin-bottom: 20px; text-transform: uppercase;
+  }
+  .theme-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(56px, 10vw, 120px);
+    line-height: 0.9;
+    color: #fff;
+    text-shadow: 0 0 60px rgba(76,205,80,0.4);
+    letter-spacing: 4px;
+    animation: glow 3s ease-in-out infinite alternate;
+  }
+  .theme-subtitle {
+    margin-top: 24px;
+    font-size: clamp(14px, 2vw, 20px);
+    font-weight: 300; letter-spacing: 3px;
+    color: rgba(255,255,255,0.75);
+  }
+  @keyframes glow {
+    from { text-shadow: 0 0 40px rgba(76,205,80,0.3); }
+    to   { text-shadow: 0 0 80px rgba(76,205,80,0.7), 0 0 120px rgba(76,205,80,0.3); }
+  }
+
+  /* ===== BLOCK 3: QR АКТУАЛИЗАЦИЯ ===== */
+  #block3 {
+    min-height: 100vh;
+    background: linear-gradient(180deg, var(--dark) 0%, #0d1f0d 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 80px 40px; gap: 60px;
+  }
+  .section-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px; letter-spacing: 6px; color: var(--accent);
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(42px, 7vw, 80px);
+    letter-spacing: 2px; text-align: center;
+  }
+  .qr-layout {
+    display: flex; gap: 60px; align-items: flex-start; flex-wrap: wrap; justify-content: center;
+    max-width: 1100px; width: 100%;
+  }
+  .qr-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(76,205,80,0.3);
+    border-radius: 24px; padding: 40px;
+    display: flex; flex-direction: column; align-items: center; gap: 20px;
+    flex: 0 0 320px;
+  }
+  .qr-box {
+    width: 160px; height: 160px;
+    background: #fff; border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    padding: 12px;
+  }
+  .qr-box svg { width: 100%; height: 100%; }
+  .qr-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px; letter-spacing: 2px; color: var(--accent);
+    text-align: center;
+  }
+  .qr-url {
+    font-size: 12px; color: rgba(255,255,255,0.4);
+    font-family: 'Space Mono', monospace; text-align: center;
+  }
+  .leaderboard {
+    flex: 1; min-width: 300px; max-width: 500px;
+  }
+  .leaderboard-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px; letter-spacing: 2px;
+    color: var(--accent); margin-bottom: 20px;
+  }
+  .podium-list {
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .podium-item {
+    display: flex; align-items: center; gap: 16px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(76,205,80,0.15);
+    border-radius: 12px; padding: 14px 20px;
+    transition: all 0.3s;
+  }
+  .podium-item:nth-child(1) { border-color: rgba(255,215,0,0.5); background: rgba(255,215,0,0.05); }
+  .podium-item:nth-child(2) { border-color: rgba(192,192,192,0.4); background: rgba(192,192,192,0.04); }
+  .podium-item:nth-child(3) { border-color: rgba(205,127,50,0.4); background: rgba(205,127,50,0.04); }
+  .rank-badge {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px; min-width: 36px;
+  }
+  .podium-item:nth-child(1) .rank-badge { color: #FFD700; }
+  .podium-item:nth-child(2) .rank-badge { color: #C0C0C0; }
+  .podium-item:nth-child(3) .rank-badge { color: #CD7F32; }
+  .student-name { font-weight: 600; font-size: 15px; flex: 1; }
+  .student-score {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px; color: var(--accent);
+  }
+  .empty-slot {
+    font-size: 13px; color: rgba(255,255,255,0.25);
+    font-family: 'Space Mono', monospace;
+    font-style: italic;
+  }
+  .refresh-btn {
+    margin-top: 16px;
+    background: none; border: 1px solid rgba(76,205,80,0.3);
+    color: var(--accent); padding: 8px 20px;
+    border-radius: 8px; font-family: 'Space Mono', monospace;
+    font-size: 12px; cursor: pointer; letter-spacing: 2px;
+    transition: all 0.2s;
+  }
+  .refresh-btn:hover { background: rgba(76,205,80,0.1); }
+
+  /* ===== BLOCK 4: THEORY ===== */
+  #block4 {
+    min-height: 100vh;
+    background: var(--mid);
+    position: relative; overflow: hidden;
+  }
+  .theory-header {
+    text-align: center; padding: 80px 40px 60px;
+    position: relative; z-index: 2;
+  }
+  .theory-slider {
+    position: relative; overflow: hidden; width: 100%;
+  }
+  .theory-track {
+    display: flex;
+    transition: transform 0.6s cubic-bezier(0.4,0,0.2,1);
+  }
+  .theory-slide {
+    min-width: 100vw;
+    min-height: 60vh;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    padding: 60px 80px;
+  }
+  .slide-bg {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    filter: brightness(0.25) saturate(0.6);
+  }
+  .slide-bg-1 { background: linear-gradient(135deg, #0a2a12, #1a4a20); }
+  .slide-bg-2 { background: linear-gradient(135deg, #0a1a2a, #1a2a40); }
+  .slide-bg-3 { background: linear-gradient(135deg, #1a0a2a, #2a1a40); }
+  .slide-content {
+    position: relative; z-index: 2;
+    max-width: 900px; width: 100%;
+    display: grid; grid-template-columns: 1fr 2fr; gap: 60px;
+    align-items: center;
+  }
+  .slide-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 120px; line-height: 1;
+    color: rgba(255,255,255,0.06);
+    position: absolute; right: 60px; top: -20px;
+  }
+  .slide-icon-wrap {
+    display: flex; flex-direction: column; align-items: center; gap: 16px;
+  }
+  .slide-icon {
+    width: 100px; height: 100px;
+    border-radius: 24px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 44px;
+  }
+  .icon-green { background: rgba(76,205,80,0.15); border: 1px solid rgba(76,205,80,0.3); }
+  .icon-blue  { background: rgba(33,150,243,0.15); border: 1px solid rgba(33,150,243,0.3); }
+  .icon-purple{ background: rgba(156,39,176,0.15); border: 1px solid rgba(156,39,176,0.3); }
+  .slide-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px; letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+  .slide-text-content {}
+  .slide-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px; letter-spacing: 2px;
+    line-height: 1; margin-bottom: 20px;
+  }
+  .slide-body {
+    font-size: 15px; line-height: 1.75;
+    color: rgba(255,255,255,0.78);
+    font-weight: 300;
+  }
+  .slide-examples {
+    margin-top: 24px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .ex-item {
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+  .ex-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    margin-top: 8px; flex-shrink: 0;
+  }
+  .dot-green { background: var(--accent); }
+  .dot-blue  { background: #64B5F6; }
+  .dot-purple{ background: #CE93D8; }
+  .ex-text { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.5; }
+  .theory-nav {
+    display: flex; align-items: center; justify-content: center;
+    gap: 24px; padding: 40px;
+    position: relative; z-index: 5;
+  }
+  .nav-btn {
+    width: 52px; height: 52px; border-radius: 50%;
+    border: 1px solid rgba(76,205,80,0.4);
+    background: rgba(76,205,80,0.08);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: all 0.2s; color: var(--accent);
+    font-size: 22px;
+  }
+  .nav-btn:hover { background: rgba(76,205,80,0.2); border-color: var(--accent); }
+  .nav-dots { display: flex; gap: 8px; }
+  .nav-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(255,255,255,0.2); cursor: pointer; transition: all 0.3s;
+  }
+  .nav-dot.active { background: var(--accent); width: 24px; border-radius: 4px; }
+
+  /* ===== BLOCK 5: THERMAL MAP ===== */
+  #block5 {
+    min-height: 100vh;
+    background: #050d05;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 80px 40px;
+  }
+  .map-container {
+    width: 100%; max-width: 1200px;
+    border-radius: 16px; overflow: hidden;
+    border: 1px solid rgba(76,205,80,0.2);
+    box-shadow: 0 0 60px rgba(0,0,0,0.5);
+    position: relative;
+  }
+  #map { width: 100%; height: 600px; }
+  .map-legend {
+    display: flex; gap: 24px; margin-top: 24px;
+    flex-wrap: wrap; justify-content: center;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; font-family: 'Space Mono', monospace;
+    color: rgba(255,255,255,0.6);
+  }
+  .legend-color {
+    width: 20px; height: 12px; border-radius: 3px;
+  }
+  .map-stats {
+    display: flex; gap: 32px; margin-top: 40px;
+    flex-wrap: wrap; justify-content: center;
+  }
+  .stat-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(76,205,80,0.15);
+    border-radius: 16px; padding: 20px 28px;
+    text-align: center; min-width: 160px;
+  }
+  .stat-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 40px; color: var(--accent);
+  }
+  .stat-label {
+    font-size: 11px; letter-spacing: 2px;
+    color: rgba(255,255,255,0.4);
+    font-family: 'Space Mono', monospace;
+    text-transform: uppercase;
+  }
+
+  /* ===== BLOCK 6: ИТОГ QR ===== */
+  #block6 {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #050d05 0%, var(--mid) 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 80px 40px; gap: 60px;
+  }
+  .tasks-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px; max-width: 1100px; width: 100%;
+    margin-top: 40px;
+  }
+  .task-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(76,205,80,0.15);
+    border-radius: 16px; padding: 24px;
+    position: relative; overflow: hidden;
+  }
+  .task-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+  }
+  .task-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px; color: rgba(255,255,255,0.06);
+    position: absolute; top: 10px; right: 16px;
+  }
+  .task-name {
+    font-weight: 700; font-size: 14px; letter-spacing: 1px;
+    color: var(--accent); text-transform: uppercase; margin-bottom: 10px;
+  }
+  .task-text { font-size: 13px; line-height: 1.6; color: rgba(255,255,255,0.65); }
+  .task-correct {
+    margin-top: 14px; padding: 10px 14px;
+    background: rgba(76,205,80,0.08); border-radius: 8px;
+    font-size: 12px; color: var(--lime);
+    font-family: 'Space Mono', monospace;
+  }
+  .block6-qr {
+    display: flex; flex-direction: column; align-items: center; gap: 24px;
+    margin-top: 20px;
+  }
+  .block6-qr .qr-card { flex: none; }
+
+  /* ===== BLOCK 7: РЕФЛЕКСИЯ ===== */
+  #block7 {
+    min-height: 100vh;
+    background: linear-gradient(180deg, var(--mid) 0%, #000a00 100%);
+    display: flex; flex-direction: column; align-items: center;
+    padding: 80px 40px; gap: 40px;
+  }
+  .reflection-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+    max-width: 1100px; width: 100%;
+  }
+  .reflection-panel {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(76,205,80,0.15);
+    border-radius: 20px; padding: 32px;
+  }
+  .ref-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px; letter-spacing: 2px;
+    margin-bottom: 24px; color: var(--accent);
+  }
+  .mood-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px;
+    margin-bottom: 24px;
+  }
+  .mood-btn {
+    aspect-ratio: 1; border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.03);
+    font-size: 28px; cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .mood-btn:hover, .mood-btn.selected {
+    border-color: var(--accent);
+    background: rgba(76,205,80,0.12);
+    transform: scale(1.08);
+  }
+  .stars-row {
+    display: flex; gap: 8px; margin-bottom: 24px;
+  }
+  .star-btn {
+    font-size: 32px; cursor: pointer; transition: all 0.2s;
+    filter: grayscale(1) opacity(0.4);
+  }
+  .star-btn.lit { filter: none; }
+  .ref-textarea {
+    width: 100%; min-height: 100px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(76,205,80,0.2);
+    border-radius: 12px; padding: 14px;
+    color: var(--text); font-family: 'Montserrat', sans-serif;
+    font-size: 14px; resize: vertical; outline: none;
+    transition: border-color 0.2s;
+  }
+  .ref-textarea:focus { border-color: var(--accent); }
+  .ref-slider-wrap { margin: 16px 0; }
+  .ref-slider-label {
+    display: flex; justify-content: space-between;
+    font-size: 12px; color: rgba(255,255,255,0.5);
+    margin-bottom: 8px; font-family: 'Space Mono', monospace;
+  }
+  .ref-slider {
+    -webkit-appearance: none;
+    width: 100%; height: 6px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--accent) var(--pct, 70%), rgba(255,255,255,0.1) var(--pct, 70%));
+    outline: none; cursor: pointer;
+  }
+  .ref-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--accent); cursor: pointer;
+    box-shadow: 0 0 8px rgba(118,255,3,0.5);
+  }
+  .ref-chart-wrap {
+    width: 100%; height: 200px; position: relative;
+  }
+  canvas#refChart { width: 100% !important; height: 100% !important; }
+  .ref-actions {
+    display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px;
+  }
+  .btn-save {
+    background: var(--accent); color: #000;
+    border: none; border-radius: 10px; padding: 12px 28px;
+    font-family: 'Montserrat', sans-serif; font-weight: 700;
+    font-size: 13px; letter-spacing: 1px; cursor: pointer; transition: all 0.2s;
+  }
+  .btn-save:hover { background: #9fff40; transform: translateY(-2px); }
+  .btn-reset {
+    background: none; border: 1px solid rgba(255,100,100,0.3);
+    color: rgba(255,100,100,0.7); border-radius: 10px; padding: 12px 22px;
+    font-family: 'Montserrat', sans-serif; font-size: 13px; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-reset:hover { border-color: rgba(255,100,100,0.7); color: rgba(255,100,100,1); }
+  .saved-msg {
+    font-family: 'Space Mono', monospace; font-size: 12px;
+    color: var(--accent); opacity: 0; transition: opacity 0.5s;
+    letter-spacing: 2px; align-self: center;
+  }
+  .saved-msg.show { opacity: 1; }
+  .history-list { margin-top: 16px; max-height: 180px; overflow-y: auto; }
+  .history-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 13px;
+  }
+  .history-date { color: rgba(255,255,255,0.35); font-family: 'Space Mono', monospace; font-size: 11px; }
+  .history-score { color: var(--accent); font-family: 'Bebas Neue', sans-serif; font-size: 20px; }
+
+  /* FOOTER */
+  footer {
+    text-align: center; padding: 32px;
+    font-family: 'Space Mono', monospace; font-size: 11px;
+    color: rgba(255,255,255,0.2); letter-spacing: 3px;
+    border-top: 1px solid rgba(76,205,80,0.08);
+  }
+
+  /* SECTION HEADERS common */
+  .sec-head { text-align: center; margin-bottom: 20px; }
+
+  @media (max-width: 768px) {
+    #block1 { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
+    .slide-content { grid-template-columns: 1fr; }
+    .reflection-grid { grid-template-columns: 1fr; }
+    .theory-slide { padding: 40px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== BLOCK 1: HERO VIDEOS ===== -->
+<section id="block1">
+  <div class="video-panel">
+    <!-- 🎬 ЗАМЕНИ НАЗВАНИЕ ФАЙЛА: вместо "video-grey.mp4" напиши имя своего файла -->
+    <video src="1.1.mp4" autoplay loop muted playsinline></video>
+    <!-- <div class="video-label">СЕРЫЙ ГОРОД</div> -->
+  </div>
+  <div class="video-panel">
+    <!-- 🎬 ЗАМЕНИ НАЗВАНИЕ ФАЙЛА: вместо "video-green.mp4" напиши имя своего файла -->
+    <video src="1.2.mp4" autoplay loop muted playsinline></video>
+    <!-- <div class="video-label">ЗЕЛЁНЫЙ КВАРТАЛ</div> -->
+  </div>
+  <div class="hero-divider"></div>
+  <div class="scroll-hint">
+    <span>SCROLL</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+</section>
+
+<!-- ===== BLOCK 2: THEME VIDEO ===== -->
+<section id="block2">
+  <!-- 🎬 ЗАМЕНИ НАЗВАНИЕ ФАЙЛА: вместо "video-theme.mp4" напиши имя своего файла -->
+  <video src="2.mp4" autoplay loop muted playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;"></video>
+  <div class="overlay"></div>
+  <div class="theme-content">
+    <!-- <div class="theme-eyebrow">ТЕМА УРОКА</div> -->
+    <div class="theme-title">ЭКО-<br>УРБАНИСТИКА</div>
+    <div class="theme-subtitle">город, в котором хочется жить</div>
+  </div>
+</section>
+
+<!-- ===== BLOCK 3: ACTUALIZATION QR ===== -->
+<section id="block3">
+  <div class="sec-head">
+    <div class="section-tag">Блок 3</div>
+    <div class="section-title">АКТУАЛИЗАЦИЯ ЗНАНИЙ</div>
+    <p style="color:rgba(255,255,255,0.45);font-size:14px;letter-spacing:2px;margin-top:8px;">«Эко-факты: Веришь или нет?»</p>
+  </div>
+  <div class="qr-layout">
+    <div class="qr-card">
+      <div class="qr-box">
+        <!-- QR pointing to actuly.html -->
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="200" fill="white"/>
+          <!-- QR placeholder pattern -->
+          <rect x="10" y="10" width="70" height="70" fill="none" stroke="#000" stroke-width="4"/>
+          <rect x="18" y="18" width="54" height="54" fill="none" stroke="#000" stroke-width="4"/>
+          <rect x="26" y="26" width="38" height="38" fill="#000"/>
+          <rect x="120" y="10" width="70" height="70" fill="none" stroke="#000" stroke-width="4"/>
+          <rect x="128" y="18" width="54" height="54" fill="none" stroke="#000" stroke-width="4"/>
+          <rect x="136" y="26" width="38" height="38" fill="#000"/>
+          <rect x="10" y="120" width="70" height="70" fill="none" stroke="#000" stroke-width="4"/>
+          <rect x="18" y="128" width="54" height="54" fill="none" stroke="#000" stroke-width="4"/>
+          <rect x="26" y="136" width="38" height="38" fill="#000"/>
+          <!-- data pixels -->
+          <rect x="100" y="10" width="10" height="10" fill="#000"/>
+          <rect x="112" y="10" width="10" height="10" fill="#000"/>
+          <rect x="100" y="22" width="10" height="10" fill="#000"/>
+          <rect x="100" y="100" width="10" height="10" fill="#000"/>
+          <rect x="112" y="100" width="10" height="10" fill="#000"/>
+          <rect x="124" y="100" width="10" height="10" fill="#000"/>
+          <rect x="136" y="100" width="10" height="10" fill="#000"/>
+          <rect x="148" y="100" width="10" height="10" fill="#000"/>
+          <rect x="100" y="112" width="10" height="10" fill="#000"/>
+          <rect x="124" y="112" width="10" height="10" fill="#000"/>
+          <rect x="148" y="112" width="10" height="10" fill="#000"/>
+          <rect x="100" y="124" width="10" height="10" fill="#000"/>
+          <rect x="112" y="124" width="10" height="10" fill="#000"/>
+          <rect x="136" y="124" width="10" height="10" fill="#000"/>
+          <rect x="160" y="124" width="10" height="10" fill="#000"/>
+          <rect x="100" y="136" width="10" height="10" fill="#000"/>
+          <rect x="124" y="136" width="10" height="10" fill="#000"/>
+          <rect x="148" y="136" width="10" height="10" fill="#000"/>
+          <rect x="160" y="136" width="10" height="10" fill="#000"/>
+          <text x="100" y="100" font-size="22" text-anchor="middle" dominant-baseline="middle" fill="#000" font-family="monospace" font-weight="bold">QR</text>
+        </svg>
+      </div>
+      <div class="qr-label">СКАНИРУЙ ДЛЯ ОПРОСА</div>
+      <div class="qr-url">→ actuly.html</div>
+      <a href="actuly.html" target="_blank" style="background:var(--accent);color:#000;padding:10px 24px;border-radius:8px;font-weight:700;font-size:13px;text-decoration:none;letter-spacing:1px;">ОТКРЫТЬ ФОРМУ</a>
+    </div>
+    <div class="leaderboard">
+      <div class="leaderboard-title">🏆 РЕЗУЛЬТАТЫ</div>
+      <div class="podium-list" id="podium3">
+        <div class="podium-item"><span class="rank-badge">1</span><span class="student-name empty-slot">— ожидание студентов —</span></div>
+        <div class="podium-item"><span class="rank-badge">2</span><span class="student-name empty-slot">— ожидание студентов —</span></div>
+        <div class="podium-item"><span class="rank-badge">3</span><span class="student-name empty-slot">— ожидание студентов —</span></div>
+      </div>
+      <button class="refresh-btn" onclick="loadPodium3()">⟳ ОБНОВИТЬ</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BLOCK 4: THEORY SLIDER ===== -->
+<section id="block4">
+  <div class="theory-header">
+    <div class="section-tag">Блок 4</div>
+    <div class="section-title">ТЕОРИЯ</div>
+  </div>
+  <div class="theory-slider">
+    <div class="theory-track" id="theoryTrack">
+
+      <!-- Slide 0: Intro -->
+      <div class="theory-slide">
+        <div class="slide-bg slide-bg-1"></div>
+        <div class="slide-number">01</div>
+        <div class="slide-content">
+          <div class="slide-icon-wrap">
+            <div class="slide-icon icon-green">🌱</div>
+            <div class="slide-tag" style="color:var(--accent)">ОСНОВА</div>
+          </div>
+          <div class="slide-text-content">
+            <div class="slide-heading" style="color:#fff">ЧТО ТАКОЕ<br>ЭКО-УРБАНИСТИКА?</div>
+            <div class="slide-body">Экологическая урбанистика — это направление, нацеленное на создание <strong style="color:var(--accent)">устойчивых городских экосистем</strong>, минимально воздействующих на окружающую среду и максимально комфортных для жизни человека.</div>
+            <div class="slide-examples">
+              <div class="ex-item"><div class="ex-dot dot-green"></div><div class="ex-text">Природа и технологии работают в единой системе</div></div>
+              <div class="ex-item"><div class="ex-dot dot-green"></div><div class="ex-text">Цель — не просто посадить деревья, а изменить всю инфраструктуру</div></div>
+              <div class="ex-item"><div class="ex-dot dot-green"></div><div class="ex-text">Три кита: Биомимикрия · Цикличная экономика · Умное управление</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 1: Biomimicry -->
+      <div class="theory-slide">
+        <div class="slide-bg slide-bg-2"></div>
+        <div class="slide-number">02</div>
+        <div class="slide-content">
+          <div class="slide-icon-wrap">
+            <div class="slide-icon icon-green">🏗️</div>
+            <div class="slide-tag" style="color:var(--lime)">КИТ №1</div>
+          </div>
+          <div class="slide-text-content">
+            <div class="slide-heading" style="color:var(--lime)">БИОМИМИКРИЯ<br><span style="font-size:28px;color:rgba(255,255,255,0.4)">Природа как образец</span></div>
+            <div class="slide-body">Архитектура <strong style="color:var(--lime)">заимствует инженерные решения у живой природы</strong>. Здания с «живыми» фасадами работают как деревья — поглощают CO₂, выделяют кислород и удерживают влагу, охлаждая город.</div>
+            <div class="slide-examples">
+              <div class="ex-item"><div class="ex-dot dot-green"></div><div class="ex-text"><strong>Вертикальные леса</strong> — превращают стены в лёгкие города</div></div>
+              <div class="ex-item"><div class="ex-dot dot-green"></div><div class="ex-text"><strong>«Умные» остановки</strong> — очищают воздух через встроенные фильтры и живой мох</div></div>
+              <div class="ex-item"><div class="ex-dot dot-green"></div><div class="ex-text"><strong>Пассивная вентиляция</strong> — здания «дышат» без кондиционеров</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: Circular Economy -->
+      <div class="theory-slide">
+        <div class="slide-bg slide-bg-3"></div>
+        <div class="slide-number">03</div>
+        <div class="slide-content">
+          <div class="slide-icon-wrap">
+            <div class="slide-icon icon-blue">♻️</div>
+            <div class="slide-tag" style="color:#64B5F6">КИТ №2</div>
+          </div>
+          <div class="slide-text-content">
+            <div class="slide-heading" style="color:#64B5F6">ЦИКЛИЧНАЯ<br>ЭКОНОМИКА<br><span style="font-size:24px;color:rgba(255,255,255,0.4)">Zero Waste</span></div>
+            <div class="slide-body"><strong style="color:#64B5F6">Полное исключение понятия «мусор»</strong>. Все отходы одного процесса становятся сырьём для другого. Концепция 3R: Reduce · Reuse · Recycle.</div>
+            <div class="slide-examples">
+              <div class="ex-item"><div class="ex-dot dot-blue"></div><div class="ex-text"><strong>Эко-дренаж</strong> — дождевая вода не в канализацию, а на полив садов</div></div>
+              <div class="ex-item"><div class="ex-dot dot-blue"></div><div class="ex-text"><strong>Биогаз</strong> — органические отходы превращаются в энергию</div></div>
+              <div class="ex-item"><div class="ex-dot dot-blue"></div><div class="ex-text"><strong>Замкнутый цикл</strong> — каждый ресурс используется многократно</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Smart Management -->
+      <div class="theory-slide">
+        <div class="slide-bg" style="background:linear-gradient(135deg,#0a0a2a,#1a1a3a)"></div>
+        <div class="slide-number">04</div>
+        <div class="slide-content">
+          <div class="slide-icon-wrap">
+            <div class="slide-icon icon-purple">🤖</div>
+            <div class="slide-tag" style="color:#CE93D8">КИТ №3</div>
+          </div>
+          <div class="slide-text-content">
+            <div class="slide-heading" style="color:#CE93D8">УМНОЕ<br>УПРАВЛЕНИЕ<br><span style="font-size:24px;color:rgba(255,255,255,0.4)">Интеллект города</span></div>
+            <div class="slide-body"><strong style="color:#CE93D8">ИИ и датчики IoT</strong> управляют городскими системами в реальном времени. ИИ анализирует потребление ресурсов, оптимизирует теплосети и управляет светофорами для ликвидации пробок.</div>
+            <div class="slide-examples">
+              <div class="ex-item"><div class="ex-dot dot-purple"></div><div class="ex-text"><strong>Тепловые карты</strong> — ИИ с точностью до метра находит «острова тепла»</div></div>
+              <div class="ex-item"><div class="ex-dot dot-purple"></div><div class="ex-text"><strong>Smart Grid</strong> — умные энергосети перераспределяют электроэнергию</div></div>
+              <div class="ex-item"><div class="ex-dot dot-purple"></div><div class="ex-text"><strong>Прогноз смога</strong> — точность 90% за 3 дня вперёд</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="theory-nav">
+    <button class="nav-btn" id="prevSlide" onclick="changeSlide(-1)">◀</button>
+    <div class="nav-dots" id="navDots"></div>
+    <button class="nav-btn" id="nextSlide" onclick="changeSlide(1)">▶</button>
+  </div>
+</section>
+
+<!-- ===== BLOCK 5: THERMAL MAP ===== -->
+<section id="block5">
+  <div class="sec-head">
+    <div class="section-tag">Блок 5</div>
+    <div class="section-title">ТЕПЛОВАЯ КАРТА ГОРОДА</div>
+    <p style="color:rgba(255,255,255,0.4);font-size:13px;letter-spacing:2px;margin-top:8px;">ИИ-анализ теплового загрязнения — перемещайте и масштабируйте карту</p>
+  </div>
+  <div class="map-container" style="margin-top:32px;">
+    <div id="map"></div>
+  </div>
+  <div class="map-legend">
+    <div class="legend-item"><div class="legend-color" style="background:#0000ff"></div>Прохладно (10–15°C)</div>
+    <div class="legend-item"><div class="legend-color" style="background:#00ff00"></div>Норма (18–22°C)</div>
+    <div class="legend-item"><div class="legend-color" style="background:#ffff00"></div>Тепло (25–28°C)</div>
+    <div class="legend-item"><div class="legend-color" style="background:#ff8800"></div>Горячо (30–33°C)</div>
+    <div class="legend-item"><div class="legend-color" style="background:#ff0000"></div>«Остров тепла» (35°C+)</div>
+  </div>
+  <div class="map-stats">
+    <div class="stat-card"><div class="stat-val">+8°C</div><div class="stat-label">Центр vs. окраина</div></div>
+    <div class="stat-card"><div class="stat-val">34%</div><div class="stat-label">Зелёных зон</div></div>
+    <div class="stat-card"><div class="stat-val">12</div><div class="stat-label">Горячих точек</div></div>
+    <div class="stat-card"><div class="stat-val">90%</div><div class="stat-label">Точность ИИ</div></div>
+  </div>
+</section>
+
+<!-- ===== BLOCK 6: CONSOLIDATION QR ===== -->
+<section id="block6">
+  <div class="sec-head">
+    <div class="section-tag">Блок 6</div>
+    <div class="section-title">ЗАКРЕПЛЕНИЕ</div>
+    <p style="color:rgba(255,255,255,0.45);font-size:14px;letter-spacing:2px;margin-top:8px;">«Выбери приоритет для города»</p>
+  </div>
+  <div class="tasks-grid">
+    <div class="task-card"><div class="task-num">01</div><div class="task-name">⚡ Энергия</div><div class="task-text">СОЛНЕЧНЫЕ ПАНЕЛИ / ЧИСТАЯ ЭНЕРГИЯ / АВТОНОМНЫЕ СИСТЕМЫ</div></div>
+    <div class="task-card"><div class="task-num">02</div><div class="task-name">🚲 Транспорт</div><div class="task-text">ВЕЛОСИПЕДНЫЕ ДОРОЖКИ / БЕЗОПАСНЫЕ ПУТИ / ОТКРЫТЫЕ КОРИДОРЫ</div></div>
+    <div class="task-card" style="border-color:rgba(76,205,80,0.5)"><div class="task-num">03</div><div class="task-name" style="color:#FFD700">♻️ Экология ресурсов ✓</div><div class="task-text">НУЛЕВЫЕ ОТХОДЫ / СОРТИРОВКА / ПЕРЕРАБОТКА</div><div class="task-correct">✓ ПРАВИЛЬНЫЙ ОТВЕТ: Основа эко-города — замкнутый цикл (Zero Waste)</div></div>
+    <div class="task-card"><div class="task-num">04</div><div class="task-name">🌳 Комфорт</div><div class="task-text">ЗЕЛЕНЫЕ ЗОНЫ / ГОРОДСКИЕ ПАРКИ / ОТКРЫТЫЕ ПРОСТРАНСТВА</div></div>
+    <div class="task-card"><div class="task-num">05</div><div class="task-name">💧 Инфраструктура</div><div class="task-text">УМНЫЕ ВОДОСЕТИ / ИНТЕЛЛЕКТУАЛЬНЫЙ КОНТРОЛЬ / УСТОЙЧИВОЕ УПРАВЛЕНИЕ</div></div>
+    <div class="task-card" style="border-color:rgba(76,205,80,0.5)"><div class="task-num">06</div><div class="task-name" style="color:#FFD700">💨 Атмосфера ✓</div><div class="task-text">ЧИСТЫЙ ВОЗДУХ / ФИЛЬТРАЦИЯ МХОМ / СНИЖЕНИЕ ВЫБРОСОВ</div><div class="task-correct">✓ Здоровье горожан напрямую зависит от качества воздуха</div></div>
+    <div class="task-card"><div class="task-num">07</div><div class="task-name">🤝 Сообщество</div><div class="task-text">ГОРОДСКИЕ САДЫ / ЖИТЕЛИ ВМЕСТЕ / СОВМЕСТНОЕ ПРОЕКТИРОВАНИЕ</div></div>
+    <div class="task-card"><div class="task-num">08</div><div class="task-name">🔋 Эко-мобильность</div><div class="task-text">ЭЛЕКТРОМОБИЛИ / ЗАРЯДНЫЕ СТАНЦИИ / ШЕРИНГ ТРАНСПОРТА</div></div>
+    <div class="task-card" style="border-color:rgba(76,205,80,0.5)"><div class="task-num">09</div><div class="task-name" style="color:#FFD700">⚡ Умные энергосети ✓</div><div class="task-text">ИНТЕЛЛЕКТУАЛЬНЫЕ СЕТИ / МИКРОГЕНЕРАЦИЯ / СТАБИЛЬНОЕ РАСПРЕДЕЛЕНИЕ</div><div class="task-correct">✓ Smart Grid: объединение солнечных панелей и ветрогенераторов</div></div>
+  </div>
+  <div class="block6-qr">
+    <div class="qr-card">
+      <div class="qr-box">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="200" fill="white"/>
+          <rect x="10" y="10" width="70" height="70" fill="none" stroke="#000" stroke-width="4"/>
+          <rect x="18" y="18" width="54" height="54" fill="none" stroke="#000" stroke-width="4"/>
+          <rect x="26" y="26" width="38" height="38" fill="#000"/>
+          <rect x="120" y="10" width="70" height="70" fill="none" stroke="#000" stroke-width="4"/>
+          <rect x="128" y="18" width="54" height="54" fill="none" stroke="#000" stroke-width="4"/>
+          <rect x="136" y="26" width="38" height="38" fill="#000"/>
+          <rect x="10" y="120" width="70" height="70" fill="none" stroke="#000" stroke-width="4"/>
+          <rect x="18" y="128" width="54" height="54" fill="none" stroke="#000" stroke-width="4"/>
+          <rect x="26" y="136" width="38" height="38" fill="#000"/>
+          <rect x="100" y="60" width="10" height="10" fill="#000"/>
+          <rect x="112" y="60" width="10" height="10" fill="#000"/>
+          <rect x="100" y="72" width="10" height="10" fill="#000"/>
+          <rect x="112" y="72" width="10" height="10" fill="#000"/>
+          <rect x="100" y="84" width="10" height="10" fill="#000"/>
+          <rect x="160" y="60" width="10" height="10" fill="#000"/>
+          <rect x="160" y="84" width="10" height="10" fill="#000"/>
+          <rect x="148" y="72" width="10" height="10" fill="#000"/>
+          <text x="100" y="170" font-size="18" text-anchor="middle" dominant-baseline="middle" fill="#000" font-family="monospace" font-weight="bold">QR</text>
+        </svg>
+      </div>
+      <div class="qr-label">ИТОГОВОЕ ЗАДАНИЕ</div>
+      <div class="qr-url">→ itog.html</div>
+      <a href="itog.html" target="_blank" style="background:var(--warm);color:#fff;padding:10px 24px;border-radius:8px;font-weight:700;font-size:13px;text-decoration:none;letter-spacing:1px;">ОТКРЫТЬ ЗАДАНИЕ</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BLOCK 7: REFLECTION ===== -->
+<section id="block7">
+  <div class="sec-head">
+    <div class="section-tag">Блок 7</div>
+    <div class="section-title">РЕФЛЕКСИЯ</div>
+    <p style="color:rgba(255,255,255,0.4);font-size:13px;letter-spacing:2px;margin-top:8px;">Как прошёл урок? Оцени своё состояние</p>
+  </div>
+  <div class="reflection-grid" style="max-width:1100px;width:100%">
+
+    <!-- Left: Inputs -->
+    <div class="reflection-panel">
+      <div class="ref-title">КАК Я СЕБЯ ЧУВСТВУЮ?</div>
+
+      <p style="font-size:12px;color:rgba(255,255,255,0.4);letter-spacing:1px;margin-bottom:12px;">ВЫБЕРИ ЭМОЦИЮ</p>
+      <div class="mood-grid">
+        <button class="mood-btn" data-mood="🤩" onclick="selectMood(this)" title="Восхищение">🤩</button>
+        <button class="mood-btn" data-mood="😊" onclick="selectMood(this)" title="Доволен">😊</button>
+        <button class="mood-btn" data-mood="😐" onclick="selectMood(this)" title="Нейтрально">😐</button>
+        <button class="mood-btn" data-mood="😕" onclick="selectMood(this)" title="Сложно">😕</button>
+        <button class="mood-btn" data-mood="🤯" onclick="selectMood(this)" title="Перегрузка">🤯</button>
+      </div>
+
+      <p style="font-size:12px;color:rgba(255,255,255,0.4);letter-spacing:1px;margin-bottom:10px;">ОЦЕНИ УРОК (звёзды)</p>
+      <div class="stars-row" id="starsRow">
+        <span class="star-btn" data-n="1" onclick="rateStar(1)">⭐</span>
+        <span class="star-btn" data-n="2" onclick="rateStar(2)">⭐</span>
+        <span class="star-btn" data-n="3" onclick="rateStar(3)">⭐</span>
+        <span class="star-btn" data-n="4" onclick="rateStar(4)">⭐</span>
+        <span class="star-btn" data-n="5" onclick="rateStar(5)">⭐</span>
+      </div>
+
+      <p style="font-size:12px;color:rgba(255,255,255,0.4);letter-spacing:1px;margin-bottom:4px;">НАСКОЛЬКО ПОНЯЛ ТЕМУ?</p>
+      <div class="ref-slider-wrap">
+        <div class="ref-slider-label"><span>0%</span><span id="sliderVal">70%</span><span>100%</span></div>
+        <input type="range" class="ref-slider" id="understandSlider" min="0" max="100" value="70"
+          oninput="document.getElementById('sliderVal').textContent=this.value+'%';this.style.setProperty('--pct',this.value+'%')">
+      </div>
+
+      <p style="font-size:12px;color:rgba(255,255,255,0.4);letter-spacing:1px;margin-bottom:8px;">ЧТО ЗАПОМНИЛОСЬ?</p>
+      <textarea class="ref-textarea" id="refNote" placeholder="Напиши мысль, идею или вопрос..."></textarea>
+
+      <div class="ref-actions">
+        <button class="btn-save" onclick="saveReflection()">СОХРАНИТЬ</button>
+        <button class="btn-reset" onclick="resetReflection()">СБРОСИТЬ</button>
+        <span class="saved-msg" id="savedMsg">✓ СОХРАНЕНО</span>
+      </div>
+    </div>
+
+    <!-- Right: History + Chart -->
+    <div class="reflection-panel" style="display:flex;flex-direction:column;">
+      <div class="ref-title">МОЙ ПРОГРЕСС</div>
+      <div class="ref-chart-wrap">
+        <canvas id="refChart"></canvas>
+      </div>
+      <div style="margin-top:24px;">
+        <p style="font-size:12px;color:rgba(255,255,255,0.4);letter-spacing:2px;margin-bottom:12px;">ИСТОРИЯ СЕССИЙ</p>
+        <div class="history-list" id="historyList">
+          <div style="font-size:13px;color:rgba(255,255,255,0.25);font-family:'Space Mono',monospace;font-style:italic;">
+            Нет сохранённых данных
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>ЭКО-УРБАНИСТИКА · УРОК 1 · АСТАНА 2025 · ИНТЕРАКТИВНАЯ ПЛАТФОРМА</footer>
+
+<!-- Leaflet for Map -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<!-- Chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+
+<script>
+// ============ BLOCK 3: PODIUM (Google Apps Script) ============
+// Replace this URL with your deployed Apps Script web app URL
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbydk_9Ks0spHtkemP0AY-jBBrqQoQUYh9ISLD_27ubk5HPb49ktjFipFJlH7J9TGww-Zw/exec';
+
+async function loadPodium3() {
+  try {
+    const res = await fetch(GAS_URL + '?action=getTop3&sheet=1');
+    const data = await res.json();
+    renderPodium('podium3', data);
+  } catch(e) {
+    console.log('Could not load leaderboard (set GAS_URL)');
+  }
+}
+function renderPodium(elId, data) {
+  const el = document.getElementById(elId);
+  if (!data || !data.length) return;
+  el.innerHTML = data.slice(0,3).map((row,i) => `
+    <div class="podium-item">
+      <span class="rank-badge">${i+1}</span>
+      <span class="student-name">${row.name || '—'}</span>
+      <span class="student-score">${row.score || ''} баллов</span>
+    </div>
+  `).join('');
+}
+
+// ============ BLOCK 4: THEORY SLIDER ============
+let currentSlide = 0;
+const totalSlides = 4;
+const track = document.getElementById('theoryTrack');
+const dotsContainer = document.getElementById('navDots');
+
+// Build dots
+for (let i=0; i<totalSlides; i++) {
+  const d = document.createElement('div');
+  d.className = 'nav-dot' + (i===0?' active':'');
+  d.onclick = () => goToSlide(i);
+  dotsContainer.appendChild(d);
+}
+function goToSlide(n) {
+  currentSlide = Math.max(0, Math.min(n, totalSlides-1));
+  track.style.transform = `translateX(-${currentSlide * 100}vw)`;
+  document.querySelectorAll('.nav-dot').forEach((d,i) => d.classList.toggle('active', i===currentSlide));
+}
+function changeSlide(dir) { goToSlide(currentSlide + dir); }
+
+// ============ BLOCK 5: THERMAL MAP ============
+const map = L.map('map', { zoomControl: true }).setView([51.18, 71.45], 12);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap contributors',
+  opacity: 0.6
+}).addTo(map);
+
+// Custom heatmap overlay using SVG circles
+const thermalLayer = L.layerGroup();
+
+const heatPoints = [
+  // [lat, lng, temp, label]
+  [51.18, 71.44, 38, 'Центр города — Остров тепла'],
+  [51.175, 71.43, 36, 'Деловой центр'],
+  [51.185, 71.46, 35, 'Торговый район'],
+  [51.19, 71.42, 28, 'Жилой район'],
+  [51.17, 71.47, 32, 'Промзона'],
+  [51.195, 71.44, 18, 'Парк — Зона охлаждения'],
+  [51.165, 71.43, 20, 'Пойма реки'],
+  [51.18, 71.49, 16, 'Лесной массив'],
+  [51.2, 71.46, 24, 'Новый жилой квартал'],
+  [51.16, 71.45, 30, 'Дорожная развязка'],
+  [51.185, 71.41, 22, 'Спальный район'],
+  [51.175, 71.455, 34, 'Авторынок'],
+];
+
+function tempToColor(t) {
+  if (t < 18) return '#0055ff';
+  if (t < 23) return '#00aaff';
+  if (t < 27) return '#00ff88';
+  if (t < 31) return '#ffff00';
+  if (t < 35) return '#ff8800';
+  return '#ff1100';
+}
+
+heatPoints.forEach(([lat, lng, temp, label]) => {
+  const circle = L.circle([lat, lng], {
+    color: 'transparent',
+    fillColor: tempToColor(temp),
+    fillOpacity: 0.55,
+    radius: 400 + (temp - 15) * 30
+  });
+  circle.bindPopup(`<strong>${label}</strong><br>🌡️ ${temp}°C`);
+  thermalLayer.addLayer(circle);
+});
+
+thermalLayer.addTo(map);
+
+// ============ BLOCK 7: REFLECTION ============
+let refMood = null, refStars = 0;
+
+function selectMood(btn) {
+  document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  refMood = btn.dataset.mood;
+}
+function rateStar(n) {
+  refStars = n;
+  document.querySelectorAll('.star-btn').forEach((s, i) => s.classList.toggle('lit', i < n));
+}
+
+let refHistory = JSON.parse(localStorage.getItem('ecoRefHistory') || '[]');
+let refChart = null;
+
+function buildChart() {
+  const ctx = document.getElementById('refChart').getContext('2d');
+  const labels = refHistory.slice(-8).map(h => h.date);
+  const scores = refHistory.slice(-8).map(h => h.score);
+  if (refChart) refChart.destroy();
+  refChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Понимание %',
+        data: scores,
+        borderColor: '#76FF03',
+        backgroundColor: 'rgba(118,255,3,0.1)',
+        pointBackgroundColor: '#76FF03',
+        pointRadius: 5,
+        tension: 0.4,
+        fill: true
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { labels: { color: 'rgba(255,255,255,0.5)', font: { family: 'Space Mono', size: 11 } } } },
+      scales: {
+        x: { ticks: { color: 'rgba(255,255,255,0.35)', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
+        y: { min: 0, max: 100, ticks: { color: 'rgba(255,255,255,0.35)' }, grid: { color: 'rgba(255,255,255,0.05)' } }
+      }
+    }
+  });
+}
+
+function renderHistory() {
+  const el = document.getElementById('historyList');
+  if (!refHistory.length) {
+    el.innerHTML = '<div style="font-size:13px;color:rgba(255,255,255,0.25);font-family:\'Space Mono\',monospace;font-style:italic;">Нет сохранённых данных</div>';
+    return;
+  }
+  el.innerHTML = refHistory.slice().reverse().map(h => `
+    <div class="history-item">
+      <span>${h.mood || '—'} ${h.stars ? '⭐'.repeat(h.stars) : ''}</span>
+      <span class="history-date">${h.date}</span>
+      <span class="history-score">${h.score}%</span>
+    </div>
+  `).join('');
+}
+
+function saveReflection() {
+  const score = parseInt(document.getElementById('understandSlider').value);
+  const note = document.getElementById('refNote').value;
+  const entry = {
+    date: new Date().toLocaleDateString('ru', {day:'2-digit',month:'2-digit'}),
+    mood: refMood,
+    stars: refStars,
+    score,
+    note
+  };
+  refHistory.push(entry);
+  localStorage.setItem('ecoRefHistory', JSON.stringify(refHistory));
+  buildChart();
+  renderHistory();
+  const msg = document.getElementById('savedMsg');
+  msg.classList.add('show');
+  setTimeout(() => msg.classList.remove('show'), 2000);
+}
+
+function resetReflection() {
+  if (!confirm('Сбросить всю историю рефлексии?')) return;
+  refHistory = [];
+  localStorage.removeItem('ecoRefHistory');
+  refMood = null; refStars = 0;
+  document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('.star-btn').forEach(s => s.classList.remove('lit'));
+  document.getElementById('understandSlider').value = 70;
+  document.getElementById('sliderVal').textContent = '70%';
+  document.getElementById('refNote').value = '';
+  buildChart();
+  renderHistory();
+}
+
+// Init
+buildChart();
+renderHistory();
+loadPodium3();
+</script>
+</body>
+</html>
