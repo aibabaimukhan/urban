@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Рефлексия — Эко-урбанистика</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root { --accent:#76FF03; --dark:#0a0f0a; --text:#e8f5e9; }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--dark);color:var(--text);font-family:'Montserrat',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:32px 16px 48px;}
+
+  .logo{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:5px;color:var(--accent);margin-bottom:24px;opacity:0.7;}
+  .card{background:rgba(255,255,255,0.04);border:1px solid rgba(118,255,3,0.2);border-radius:20px;padding:28px;max-width:480px;width:100%;}
+  h1{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:2px;margin-bottom:4px;}
+  .sub{font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:3px;font-family:'Space Mono',monospace;margin-bottom:24px;}
+  label{font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:2px;display:block;margin-bottom:8px;margin-top:16px;text-transform:uppercase;}
+  input[type=text]{width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(118,255,3,0.2);border-radius:10px;padding:12px 14px;color:var(--text);font-family:'Montserrat',sans-serif;font-size:15px;outline:none;transition:border-color 0.2s;}
+  input[type=text]:focus{border-color:var(--accent);}
+  .mood-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:4px;}
+  .mood-btn{aspect-ratio:1;border-radius:12px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);font-size:26px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;}
+  .mood-btn.selected{border-color:var(--accent);background:rgba(118,255,3,0.12);transform:scale(1.1);}
+  .stars-row{display:flex;gap:6px;margin-bottom:4px;}
+  .star-btn{font-size:30px;cursor:pointer;transition:all 0.2s;filter:grayscale(1) opacity(0.35);}
+  .star-btn.lit{filter:none;}
+  .slider-wrap{margin:4px 0 8px;}
+  .slider-labels{display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:6px;font-family:'Space Mono',monospace;}
+  input[type=range]{-webkit-appearance:none;width:100%;height:5px;border-radius:3px;background:linear-gradient(90deg,var(--accent) var(--pct,70%),rgba(255,255,255,0.1) var(--pct,70%));outline:none;cursor:pointer;}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px rgba(118,255,3,0.5);}
+  textarea{width:100%;min-height:80px;background:rgba(255,255,255,0.04);border:1px solid rgba(118,255,3,0.2);border-radius:10px;padding:12px;color:var(--text);font-family:'Montserrat',sans-serif;font-size:13px;resize:vertical;outline:none;transition:border-color 0.2s;}
+  textarea:focus{border-color:var(--accent);}
+  .submit-btn{width:100%;margin-top:20px;background:var(--accent);color:#000;border:none;border-radius:12px;padding:14px;font-family:'Montserrat',sans-serif;font-weight:900;font-size:14px;letter-spacing:2px;cursor:pointer;transition:all 0.2s;}
+  .submit-btn:hover{background:#9fff40;transform:translateY(-2px);}
+  .submit-btn:disabled{opacity:0.4;cursor:not-allowed;transform:none;}
+  .err{color:#ff9090;font-size:12px;margin-top:6px;display:none;}
+  /* Success */
+  .success{display:none;text-align:center;padding:16px 0;}
+  .success-icon{font-size:60px;margin-bottom:12px;}
+  .success-title{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--accent);letter-spacing:2px;}
+  .success-sub{font-size:13px;color:rgba(255,255,255,0.45);margin-top:10px;line-height:1.7;}
+</style>
+</head>
+<body>
+<div class="logo">ЭКО-УРБАНИСТИКА · РЕФЛЕКСИЯ</div>
+
+<div class="card" id="mainCard">
+  <h1>КАК ПРОШЁЛ УРОК?</h1>
+  <div class="sub">БЛОК 7 · РЕФЛЕКСИЯ СТУДЕНТА</div>
+
+  <label>ТВОЁ ФИО</label>
+  <input type="text" id="fioInput" placeholder="Фамилия Имя Отчество" maxlength="80">
+  <div class="err" id="errMsg">Пожалуйста, введи своё ФИО</div>
+
+  <label>КАК ТЫ СЕБЯ ЧУВСТВУЕШЬ?</label>
+  <div class="mood-grid">
+    <button class="mood-btn" data-mood="🤩" onclick="selectMood(this)">🤩</button>
+    <button class="mood-btn" data-mood="😊" onclick="selectMood(this)">😊</button>
+    <button class="mood-btn" data-mood="😐" onclick="selectMood(this)">😐</button>
+    <button class="mood-btn" data-mood="😕" onclick="selectMood(this)">😕</button>
+    <button class="mood-btn" data-mood="🤯" onclick="selectMood(this)">🤯</button>
+  </div>
+
+  <label>ОЦЕНИ УРОК</label>
+  <div class="stars-row" id="starsRow">
+    <span class="star-btn" onclick="rateStar(1)">⭐</span>
+    <span class="star-btn" onclick="rateStar(2)">⭐</span>
+    <span class="star-btn" onclick="rateStar(3)">⭐</span>
+    <span class="star-btn" onclick="rateStar(4)">⭐</span>
+    <span class="star-btn" onclick="rateStar(5)">⭐</span>
+  </div>
+
+  <label>НАСКОЛЬКО ПОНЯЛ ТЕМУ? <span id="sVal" style="color:var(--accent)">70%</span></label>
+  <div class="slider-wrap">
+    <div class="slider-labels"><span>0%</span><span>100%</span></div>
+    <input type="range" id="slider" min="0" max="100" value="70"
+      oninput="document.getElementById('sVal').textContent=this.value+'%';this.style.setProperty('--pct',this.value+'%')">
+  </div>
+
+  <label>ЧТО ЗАПОМНИЛОСЬ БОЛЬШЕ ВСЕГО?</label>
+  <textarea id="noteInput" placeholder="Напиши мысль, идею или вопрос..."></textarea>
+
+  <button class="submit-btn" id="submitBtn" onclick="submitReflection()">ОТПРАВИТЬ</button>
+</div>
+
+<div class="card success" id="successCard">
+  <div class="success-icon">🌿</div>
+  <div class="success-title">СПАСИБО!</div>
+  <div class="success-sub">Твоя рефлексия отправлена.<br>Результаты появятся на экране преподавателя.</div>
+  <div style="margin-top:16px;font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:3px;">✓ ЛИСТ 4 ОБНОВЛЁН</div>
+</div>
+
+<script>
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbxwnQRapHtdLAschpmCckZH0PfvP7HNTK_K7STMe9vwgCJDUd4bhNWq-Y_s9vKrENKIwg/exec';
+let mood = null, stars = 0;
+
+function selectMood(btn){
+  document.querySelectorAll('.mood-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected'); mood = btn.dataset.mood;
+}
+function rateStar(n){
+  stars = n;
+  document.querySelectorAll('.star-btn').forEach((s,i)=>s.classList.toggle('lit',i<n));
+}
+function submitReflection(){
+  const fio = document.getElementById('fioInput').value.trim();
+  if(!fio){ document.getElementById('errMsg').style.display='block'; return; }
+  document.getElementById('errMsg').style.display='none';
+  document.getElementById('submitBtn').disabled=true;
+  document.getElementById('submitBtn').textContent='ОТПРАВЛЯЮ...';
+  const score = parseInt(document.getElementById('slider').value);
+  const note = document.getElementById('noteInput').value;
+  fetch(GAS_URL,{
+    method:'POST', mode:'no-cors',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({action:'submitStudentReflection',fio,mood,stars,score,note,timestamp:new Date().toISOString()})
+  }).catch(()=>{});
+  setTimeout(()=>{
+    document.getElementById('mainCard').style.display='none';
+    document.getElementById('successCard').style.display='block';
+  },700);
+}
+</script>
+</body>
+</html>
