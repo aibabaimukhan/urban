@@ -1,118 +1,159 @@
 /**
- * GOOGLE APPS SCRIPT — Эко-урбанистика
- * 
- * Как использовать:
- * 1. Открой Google Sheets → Extensions → Apps Script
- * 2. Вставь этот код
- * 3. Нажми Deploy → New deployment → Web App
- *    - Execute as: Me
- *    - Who has access: Anyone
- * 4. Скопируй URL и вставь в GAS_URL в index.html, actuly.html, itog.html
+ * ============================================================
+ * GOOGLE APPS SCRIPT — Эко-урбанистика (ПОЛНАЯ ВЕРСИЯ)
+ * ============================================================
+ * Листы:
+ *   Лист1  — Блок 3: Актуализация (actuly.html)
+ *   Лист2  — Блок 6: Итог (itog.html)
+ *   Лист3  — Суммарные баллы (Лист1 + Лист2)
+ *   Лист4  — Рефлексия студентов (reflection.html)
  *
- * Структура листов:
- *   Лист 1 (Sheet1): Данные из actuly.html (Блок 3 — Актуализация)
- *   Лист 2 (Sheet2): Данные из itog.html (Блок 6 — Итог)
- *   Лист 3 (Sheet3): Суммарные баллы по студентам
+ * КАК ПОДКЛЮЧИТЬ:
+ *  1. Google Sheets → Расширения → Apps Script → вставь этот код
+ *  2. Deploy → New deployment → Web App
+ *     Execute as: Me | Who has access: Anyone
+ *  3. Скопируй URL → вставь в GAS_URL во всех HTML-файлах
+ * ============================================================
  */
 
-const SHEET_NAMES = {
-  block3: 'Лист1',
-  block6: 'Лист2',
-  totals: 'Лист3'
+const SHEETS = {
+  block3:     'Лист1',
+  block6:     'Лист2',
+  totals:     'Лист3',
+  reflection: 'Лист4'
 };
 
+// ---------- CORS headers ----------
+function setCORS(output) {
+  return output
+    .setHeader('Access-Control-Allow-Origin', '*')
+    .setHeader('Access-Control-Allow-Methods', 'GET,POST')
+    .setHeader('Access-Control-Allow-Headers', 'Content-Type');
+}
+
+function doOptions() {
+  return setCORS(ContentService.createTextOutput('').setMimeType(ContentService.MimeType.TEXT));
+}
+
+// ---------- POST handler ----------
 function doPost(e) {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
   let data;
-  try {
-    data = JSON.parse(e.postData.contents);
-  } catch(err) {
-    return ContentService.createTextOutput(JSON.stringify({status:'error',msg:'bad json'}))
-      .setMimeType(ContentService.MimeType.JSON);
-  }
+  try { data = JSON.parse(e.postData.contents); }
+  catch(err) { return jsonOut({status:'error',msg:'bad json'}); }
 
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+
+  // ---- Блок 3: актуализация ----
   if (data.action === 'submit') {
-    // Block 3 — actuly.html
-    const sheet1 = ss.getSheetByName(SHEET_NAMES.block3) || ss.insertSheet(SHEET_NAMES.block3);
-    if (sheet1.getLastRow() === 0) {
-      sheet1.appendRow(['Дата/Время', 'ФИО', 'Баллы (Блок 3)', 'Ответы JSON']);
-    }
-    sheet1.appendRow([data.timestamp, data.fio, data.score, data.answers]);
-    updateTotals(ss, data.fio, parseInt(data.score) || 0, 0);
-    return jsonOk();
+    const s = getOrCreateSheet(ss, SHEETS.block3, ['Дата/Время','ФИО','Баллы (Блок3)','Ответы']);
+    s.appendRow([data.timestamp, data.fio, Number(data.score)||0, data.answers||'']);
+    updateTotals(ss, data.fio, Number(data.score)||0, 0);
+    return jsonOut({status:'ok'});
   }
 
+  // ---- Блок 6: итог ----
   if (data.action === 'submitItog') {
-    // Block 6 — itog.html
-    const sheet2 = ss.getSheetByName(SHEET_NAMES.block6) || ss.insertSheet(SHEET_NAMES.block6);
-    if (sheet2.getLastRow() === 0) {
-      sheet2.appendRow(['Дата/Время', 'ФИО', 'Баллы (Блок 6)', 'Ответы JSON']);
-    }
-    sheet2.appendRow([data.timestamp, data.fio, data.score6, data.answers]);
-    updateTotals(ss, data.fio, 0, parseInt(data.score6) || 0);
-    return jsonOk();
+    const s = getOrCreateSheet(ss, SHEETS.block6, ['Дата/Время','ФИО','Баллы (Блок6)','Ответы']);
+    s.appendRow([data.timestamp, data.fio, Number(data.score6)||0, data.answers||'']);
+    updateTotals(ss, data.fio, 0, Number(data.score6)||0);
+    return jsonOut({status:'ok'});
   }
 
-  return jsonOk();
+  // ---- Рефлексия студентов (reflection.html) → Лист4 ----
+  if (data.action === 'submitStudentReflection') {
+    const s = getOrCreateSheet(ss, SHEETS.reflection, ['Дата/Время','ФИО','Эмоция','Звёзды','Понимание %','Заметка']);
+    s.appendRow([data.timestamp, data.fio||'', data.mood||'', Number(data.stars)||0, Number(data.score)||0, data.note||'']);
+    return jsonOut({status:'ok'});
+  }
+
+  // ---- Рефлексия преподавателя (index.html, Блок 7) → Лист4 ----
+  if (data.action === 'submitTeacherReflection') {
+    const s = getOrCreateSheet(ss, SHEETS.reflection, ['Дата/Время','ФИО','Эмоция','Звёзды','Понимание %','Заметка']);
+    s.appendRow([data.timestamp, '(Преподаватель)', data.mood||'', Number(data.stars)||0, Number(data.score)||0, data.note||'']);
+    return jsonOut({status:'ok'});
+  }
+
+  return jsonOut({status:'ignored'});
+}
+
+// ---------- GET handler ----------
+function doGet(e) {
+  const action = e.parameter.action;
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+
+  // Топ-3 для подиума Блока 3 (из Лист3)
+  if (action === 'getTop3') {
+    const s = ss.getSheetByName(SHEETS.totals);
+    if (!s || s.getLastRow() < 2) return jsonOut([]);
+    const rows = s.getRange(2, 1, s.getLastRow()-1, 4).getValues();
+    const top3 = rows
+      .filter(r => r[0])
+      .sort((a,b) => (b[3]||0) - (a[3]||0))
+      .slice(0,3)
+      .map(r => ({name: r[0], score: r[3]}));
+    return jsonOut(top3);
+  }
+
+  // Статистика рефлексии для графика на index.html (из Лист4)
+  if (action === 'getReflectionStats') {
+    const s = ss.getSheetByName(SHEETS.reflection);
+    if (!s || s.getLastRow() < 2) return jsonOut([]);
+    const rows = s.getRange(2, 1, s.getLastRow()-1, 6).getValues();
+    const moodMap = {};
+    rows.forEach(r => {
+      const m = r[2] || '❓';
+      moodMap[m] = (moodMap[m]||0) + 1;
+    });
+    const result = Object.entries(moodMap).map(([mood, count]) => ({mood, count}));
+    return jsonOut(result);
+  }
+
+  return jsonOut({status:'ok'});
+}
+
+// ---------- HELPERS ----------
+function getOrCreateSheet(ss, name, headers) {
+  let s = ss.getSheetByName(name);
+  if (!s) {
+    s = ss.insertSheet(name);
+    s.appendRow(headers);
+    s.getRange(1, 1, 1, headers.length)
+      .setFontWeight('bold')
+      .setBackground('#1a4a1a')
+      .setFontColor('#76FF03');
+  }
+  return s;
 }
 
 function updateTotals(ss, fio, delta3, delta6) {
-  const sheet3 = ss.getSheetByName(SHEET_NAMES.totals) || ss.insertSheet(SHEET_NAMES.totals);
-  
-  if (sheet3.getLastRow() === 0) {
-    sheet3.appendRow(['ФИО', 'Блок 3 (актуализация)', 'Блок 6 (итог)', 'СУММАРНЫЙ БАЛЛ']);
-    sheet3.getRange(1, 1, 1, 4).setFontWeight('bold').setBackground('#1a4a1a').setFontColor('#76FF03');
-  }
-
-  // Find existing row for this student
-  const data = sheet3.getDataRange().getValues();
+  const s = getOrCreateSheet(ss, SHEETS.totals, ['ФИО','Блок 3','Блок 6','ИТОГО']);
+  const lr = s.getLastRow();
   let found = false;
-  for (let i = 1; i < data.length; i++) {
-    if (data[i][0] && data[i][0].toString().toLowerCase() === fio.toLowerCase()) {
-      const row = i + 1;
-      const prev3 = parseInt(data[i][1]) || 0;
-      const prev6 = parseInt(data[i][2]) || 0;
-      const new3 = delta3 > 0 ? delta3 : prev3;
-      const new6 = delta6 > 0 ? delta6 : prev6;
-      sheet3.getRange(row, 2).setValue(new3);
-      sheet3.getRange(row, 3).setValue(new6);
-      sheet3.getRange(row, 4).setValue(new3 + new6);
-      found = true;
-      break;
+  if (lr > 1) {
+    const data = s.getRange(2, 1, lr-1, 4).getValues();
+    for (let i=0; i<data.length; i++) {
+      if ((data[i][0]||'').toLowerCase() === fio.toLowerCase()) {
+        const row = i + 2;
+        const prev3 = Number(data[i][1])||0;
+        const prev6 = Number(data[i][2])||0;
+        const n3 = delta3 > 0 ? delta3 : prev3;
+        const n6 = delta6 > 0 ? delta6 : prev6;
+        s.getRange(row, 2, 1, 3).setValues([[n3, n6, n3+n6]]);
+        found = true;
+        break;
+      }
     }
   }
-  if (!found) {
-    sheet3.appendRow([fio, delta3, delta6, delta3 + delta6]);
-  }
-  
-  // Sort by total descending
-  const lastRow = sheet3.getLastRow();
-  if (lastRow > 2) {
-    sheet3.getRange(2, 1, lastRow-1, 4).sort({column: 4, ascending: false});
+  if (!found) s.appendRow([fio, delta3, delta6, delta3+delta6]);
+  // Сортировка по убыванию ИТОГО
+  if (s.getLastRow() > 2) {
+    s.getRange(2, 1, s.getLastRow()-1, 4).sort({column:4, ascending:false});
   }
 }
 
-function doGet(e) {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
-  const action = e.parameter.action;
-  const sheetNum = e.parameter.sheet;
-
-  if (action === 'getTop3') {
-    const sheetName = sheetNum === '1' ? SHEET_NAMES.totals : SHEET_NAMES.totals;
-    const sheet = ss.getSheetByName(sheetName);
-    if (!sheet || sheet.getLastRow() < 2) {
-      return jsonOk([]);
-    }
-    const data = sheet.getRange(2, 1, Math.min(sheet.getLastRow()-1, 3), 4).getValues();
-    const top3 = data.map(row => ({ name: row[0], score: row[3] }));
-    return ContentService.createTextOutput(JSON.stringify(top3))
-      .setMimeType(ContentService.MimeType.JSON);
-  }
-
-  return jsonOk([]);
-}
-
-function jsonOk(data) {
-  return ContentService.createTextOutput(JSON.stringify({status:'ok', data: data || null}))
-    .setMimeType(ContentService.MimeType.JSON);
+function jsonOut(data) {
+  return setCORS(
+    ContentService.createTextOutput(JSON.stringify(data))
+      .setMimeType(ContentService.MimeType.JSON)
+  );
 }
