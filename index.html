@@ -297,7 +297,7 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
 <section id="block3">
   <div class="sec-head">
     <div class="section-tag">Блок 3</div>
-    <div class="section-title">ЭКО-ФАКТЫ</div>
+    <div class="section-title">АКТУАЛИЗАЦИЯ ЗНАНИЙ</div>
     <p style="color:rgba(255,255,255,0.45);font-size:13px;letter-spacing:2px;margin-top:8px;">«Эко-факты: Веришь или нет?»</p>
   </div>
   <div class="qr-layout">
@@ -395,7 +395,7 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
         <div class="slide-bg" style="background:url('slide3-bg.jpg') center/cover; background-color:#0a1a2a;"></div>
         <div class="slide-number">03</div>
         <div class="slide-content">
-          <div class="slide-imgs-double" style="flex-direction: row;">  
+          <div class="slide-imgs-double">
             <!-- 🖼 Замени slide3-img1.jpg и slide3-img2.jpg на свои файлы -->
             <div style="background:url('3.jpeg') center/cover; background-color:#0d2a3a; border-radius:12px; border:1px solid rgba(255,255,255,0.1);"></div>
             <div style="background:url('3.1.jpeg') center/cover; background-color:#0a3020; border-radius:12px; border:1px solid rgba(255,255,255,0.1);"></div>
@@ -495,15 +495,38 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
   <div class="sec-head">
     <div class="section-tag">Блок 6</div>
     <div class="section-title">ЗАКРЕПЛЕНИЕ</div>
-    <!-- <p style="color:rgba(255,255,255,0.45);font-size:13px;letter-spacing:2px;margin-top:8px;">«Выбери приоритет для города»</p> -->
   </div>
-  <div class="block6-qr">
-    <div class="qr-card">
-      <div class="qr-box"><img src="qr2.png" alt="QR Итог"></div>
-      <div class="qr-label">ИТОГОВОЕ ЗАДАНИЕ</div>
-      <div class="qr-url">→ itog.html</div>
-      <a href="itog.html" target="_blank" style="background:var(--warm);color:#fff;padding:10px 24px;border-radius:8px;font-weight:700;font-size:13px;text-decoration:none;letter-spacing:1px;transition:all 0.2s;" onmouseover="this.style.background='#ff8355'" onmouseout="this.style.background='var(--warm)'">ОТКРЫТЬ ЗАДАНИЕ</a>
+
+  <div style="display:flex;gap:48px;align-items:flex-start;flex-wrap:wrap;justify-content:center;max-width:1100px;width:100%;">
+
+    <!-- QR -->
+    <div class="block6-qr">
+      <div class="qr-card">
+        <div class="qr-box"><img src="qr2.png" alt="QR Итог"></div>
+        <div class="qr-label">ИТОГОВОЕ ЗАДАНИЕ</div>
+        <div class="qr-url">→ itog.html</div>
+        <a href="itog.html" target="_blank" style="background:var(--warm);color:#fff;padding:10px 24px;border-radius:8px;font-weight:700;font-size:13px;text-decoration:none;letter-spacing:1px;transition:all 0.2s;" onmouseover="this.style.background='#ff8355'" onmouseout="this.style.background='var(--warm)'">ОТКРЫТЬ ЗАДАНИЕ</a>
+      </div>
     </div>
+
+    <!-- Итоговая таблица Блок3 + Блок6 -->
+    <div style="flex:1;min-width:320px;max-width:640px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:var(--accent);">🏆 ИТОГОВЫЙ РЕЙТИНГ</div>
+        <button class="refresh-btn" onclick="loadBlock6Board()" style="margin-top:0;">⟳ ОБНОВИТЬ</button>
+      </div>
+      <!-- Шапка -->
+      <div style="display:grid;grid-template-columns:1fr 70px 70px 80px;gap:4px;padding:0 8px 8px;font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,0.3);letter-spacing:1px;border-bottom:1px solid rgba(118,255,3,0.15);">
+        <span>СТУДЕНТ</span>
+        <span style="text-align:right;">БЛОК 3</span>
+        <span style="text-align:right;">БЛОК 6</span>
+        <span style="text-align:right;color:var(--accent);">ИТОГО</span>
+      </div>
+      <div id="block6Board" style="margin-top:4px;">
+        <div style="font-size:12px;color:rgba(255,255,255,0.25);font-family:'Space Mono',monospace;font-style:italic;padding:16px 8px;">Нажмите «Обновить» для загрузки...</div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -589,7 +612,7 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
       <div style="border-top:1px solid rgba(118,255,3,0.12);margin-bottom:20px;"></div>
 
       <!-- Данные из GAS (Лист 4) -->
-      <p style="font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:2px;margin-bottom:12px;">📊 ОТВЕТЫ (ИЗ ТАБЛИЦЫ)</p>
+      <p style="font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:2px;margin-bottom:12px;">📊 ОТВЕТЫ КЛАССА (ИЗ ТАБЛИЦЫ)</p>
 
       <!-- График эмоций -->
       <div style="height:160px;position:relative;margin-bottom:16px;">
@@ -614,13 +637,13 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
   </div>
 </section>
 
-<footer>ЭКО-УРБАНИСТИКА · УРОК · ИНТЕРАКТИВНАЯ ПЛАТФОРМА</footer>
+<footer>ЭКО-УРБАНИСТИКА · УРОК 1 · АСТАНА 2025 · ИНТЕРАКТИВНАЯ ПЛАТФОРМА</footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <script>
 // ============ GAS URL ============
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbzQTrp7W7b8NCSDDJnalcv5CcxZrwGVg9q_TZeWUS_oQQitncpolt7nKX11xYlGK3G7TQ/exec';
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbz-iuC6xgKYaOInW00pJPRXsLqY-BD4k5MVlcLIeroXWfKzhYAsNlfQCXgcYPi56RgPeQ/exec';
 
 // ---- JSONP helper — обходит CORS для GET-запросов к GAS ----
 function jsonp(url) {
@@ -887,8 +910,45 @@ async function loadLiveChart() {
   }
 }
 
+// ============ BLOCK 6: ИТОГОВЫЙ РЕЙТИНГ (Блок3 + Блок6) ============
+async function loadBlock6Board() {
+  const el = document.getElementById('block6Board');
+  el.innerHTML = '<div style="font-size:12px;color:rgba(255,255,255,0.3);font-family:\'Space Mono\',monospace;padding:12px 8px;">загрузка...</div>';
+  try {
+    const raw = await jsonp(GAS_URL + '?action=getBlock6Leaderboard');
+    const rows = Array.isArray(raw) ? raw : (raw.data || []);
+    if (!rows.length) {
+      el.innerHTML = '<div style="font-size:12px;color:rgba(255,255,255,0.25);font-family:\'Space Mono\',monospace;font-style:italic;padding:12px 8px;">Пока нет данных — ждём ответов студентов</div>';
+      return;
+    }
+    const maxTotal = Math.max(...rows.map(r => r.total), 1);
+    el.innerHTML = rows.map((r, i) => {
+      const pct = Math.round((r.total / maxTotal) * 100);
+      const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `<span style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:rgba(255,255,255,0.3);">${i+1}</span>`;
+      return `
+        <div style="padding:10px 8px;border-bottom:1px solid rgba(255,255,255,0.05);">
+          <div style="display:grid;grid-template-columns:1fr 70px 70px 80px;gap:4px;align-items:center;margin-bottom:6px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-size:18px;min-width:24px;text-align:center;">${medal}</span>
+              <span style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.85);">${r.name}</span>
+            </div>
+            <div style="text-align:right;font-family:'Space Mono',monospace;font-size:12px;color:rgba(118,255,3,0.7);">${r.score3}/5</div>
+            <div style="text-align:right;font-family:'Space Mono',monospace;font-size:12px;color:rgba(100,181,246,0.8);">${r.score6}/10</div>
+            <div style="text-align:right;font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--accent);">${r.total}</div>
+          </div>
+          <div style="height:5px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;">
+            <div style="height:100%;width:${pct}%;background:${i===0?'var(--gold)':i===1?'#C0C0C0':i===2?'#CD7F32':'var(--accent)'};border-radius:3px;transition:width 0.8s ease;box-shadow:0 0 6px rgba(118,255,3,0.3);"></div>
+          </div>
+        </div>`;
+    }).join('');
+  } catch(e) {
+    el.innerHTML = '<div style="font-size:11px;color:rgba(255,100,100,0.5);font-family:\'Space Mono\',monospace;padding:8px;">⚠ Ошибка загрузки. Проверь GAS_URL.</div>';
+    console.log('Block6 board error:', e);
+  }
+}
+
 // Init
-buildChart(); renderHistory(); loadPodium3(); loadLiveChart();
+buildChart(); renderHistory(); loadPodium3(); loadLiveChart(); loadBlock6Board();
 </script>
 </body>
 </html>
