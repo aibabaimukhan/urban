@@ -187,21 +187,17 @@ body { background: var(--dark); color: var(--text); font-family: 'Montserrat', s
 
 /* ===== BLOCK 7 ===== */
 #block7 { min-height: 100vh; background: linear-gradient(180deg, var(--mid) 0%, #000a00 100%); display: flex; flex-direction: column; align-items: center; padding: 80px 24px; gap: 40px; }
-.b7-layout { display: grid; grid-template-columns: 300px 1fr 1fr; gap: 24px; max-width: 1200px; width: 100%; }
+.b7-layout { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1200px; width: 100%; align-items: stretch; }
 
-/* QR-колонка (левая) */
-.b7-qr-col { display: flex; flex-direction: column; gap: 16px; }
-.b7-qr-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(118,255,3,0.3); border-radius: 20px; padding: 24px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
-.b7-qr-title { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px; color: var(--accent); text-align: center; }
-.b7-qr-box { width: 130px; height: 130px; background: #fff; border-radius: 12px; padding: 6px; display: flex; align-items: center; justify-content: center; }
+/* QR-колонка (левая) — теперь такая же панель как соседи */
+.b7-qr-col { background: rgba(255,255,255,0.03); border: 1px solid rgba(118,255,3,0.3); border-radius: 20px; padding: 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; }
+.b7-qr-title { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 2px; color: var(--accent); text-align: center; line-height: 1.1; }
+.b7-qr-box { width: 180px; height: 180px; background: #fff; border-radius: 16px; padding: 8px; display: flex; align-items: center; justify-content: center; }
 .b7-qr-box img { width: 100%; height: 100%; object-fit: contain; }
-.b7-qr-sub { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,0.35); text-align: center; }
-.b7-qr-link { background: var(--accent); color: #000; padding: 8px 18px; border-radius: 8px; font-weight: 700; font-size: 11px; text-decoration: none; letter-spacing: 1px; transition: all 0.2s; }
-.b7-qr-link:hover { background: #9fff40; }
-.b7-live-chart { background: rgba(255,255,255,0.03); border: 1px solid rgba(76,205,80,0.12); border-radius: 16px; padding: 18px; flex: 1; }
-.b7-live-title { font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 2px; color: var(--accent); margin-bottom: 10px; }
-.b7-live-wrap { height: 120px; position: relative; }
-.b7-refresh { margin-top: 10px; background: none; border: 1px solid rgba(76,205,80,0.25); color: var(--accent); padding: 6px 14px; border-radius: 6px; font-family: 'Space Mono', monospace; font-size: 10px; cursor: pointer; letter-spacing: 2px; transition: all 0.2s; width: 100%; }
+.b7-qr-sub { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px; color: rgba(255,255,255,0.35); text-align: center; }
+.b7-qr-link { background: var(--accent); color: #000; padding: 12px 28px; border-radius: 10px; font-weight: 700; font-size: 13px; text-decoration: none; letter-spacing: 1px; transition: all 0.2s; }
+.b7-qr-link:hover { background: #9fff40; transform: translateY(-2px); }
+.b7-refresh { margin-top: 10px; background: none; border: 1px solid rgba(76,205,80,0.25); color: var(--accent); padding: 8px 14px; border-radius: 8px; font-family: 'Space Mono', monospace; font-size: 10px; cursor: pointer; letter-spacing: 2px; transition: all 0.2s; width: 100%; }
 .b7-refresh:hover { background: rgba(76,205,80,0.08); }
 
 /* Панели рефлексии */
@@ -239,9 +235,8 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
 /* ===== АДАПТИВ ===== */
 @media (max-width: 1024px) {
   .b7-layout { grid-template-columns: 1fr 1fr; }
-  .b7-qr-col { grid-column: 1 / -1; flex-direction: row; align-items: flex-start; flex-wrap: wrap; justify-content: center; }
-  .b7-qr-card { flex: 0 0 auto; width: 220px; }
-  .b7-live-chart { flex: 1; min-width: 260px; }
+  .b7-qr-col { grid-column: 1 / -1; flex-direction: row; align-items: center; justify-content: center; gap: 40px; padding: 32px 40px; }
+  .b7-qr-col p { display: none; }
   .pillars-grid { grid-template-columns: 1fr; gap: 16px; }
 }
 @media (max-width: 768px) {
@@ -250,7 +245,7 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
   .slide-content { grid-template-columns: 1fr; gap: 24px; }
   .slide-imgs-double { height: 180px; }
   .b7-layout { grid-template-columns: 1fr; }
-  .b7-qr-col { flex-direction: column; align-items: center; }
+  .b7-qr-col { flex-direction: column; align-items: center; text-align: center; }
   .theory-slide { padding: 40px 16px; }
   #block3, #block6, #block7 { padding: 60px 20px; gap: 32px; }
   .qr-card { flex: 0 0 auto; width: 100%; max-width: 300px; padding: 28px; }
@@ -302,7 +297,7 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
 <section id="block3">
   <div class="sec-head">
     <div class="section-tag">Блок 3</div>
-    <div class="section-title">АКТУАЛИЗАЦИЯ ЗНАНИЙ</div>
+    <div class="section-title">ЭКО-ФАКТЫ</div>
     <p style="color:rgba(255,255,255,0.45);font-size:13px;letter-spacing:2px;margin-top:8px;">«Эко-факты: Веришь или нет?»</p>
   </div>
   <div class="qr-layout">
@@ -339,7 +334,7 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
         <div class="slide-number">01</div>
         <div class="slide-content">
           <div>
-            <div class="slide-img" style="background:url('slide1-img.jpg') center/cover; background-color:#0a3a18; min-height:200px; border-radius:14px;"></div>
+            <div class="slide-img" style="background:url('3.4.png') center/cover; background-color:#0a3a18; min-height:200px; border-radius:14px;"></div>
           </div>
           <div class="slide-text-content">
             <div class="slide-tag" style="color:var(--accent)">ОСНОВА</div>
@@ -400,10 +395,10 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
         <div class="slide-bg" style="background:url('slide3-bg.jpg') center/cover; background-color:#0a1a2a;"></div>
         <div class="slide-number">03</div>
         <div class="slide-content">
-          <div class="slide-imgs-double">
+          <div class="slide-imgs-double" style="flex-direction: row;">  
             <!-- 🖼 Замени slide3-img1.jpg и slide3-img2.jpg на свои файлы -->
-            <div style="background:url('slide3-img1.jpg') center/cover; background-color:#0d2a3a; border-radius:12px; border:1px solid rgba(255,255,255,0.1);"></div>
-            <div style="background:url('slide3-img2.jpg') center/cover; background-color:#0a3020; border-radius:12px; border:1px solid rgba(255,255,255,0.1);"></div>
+            <div style="background:url('3.jpeg') center/cover; background-color:#0d2a3a; border-radius:12px; border:1px solid rgba(255,255,255,0.1);"></div>
+            <div style="background:url('3.1.jpeg') center/cover; background-color:#0a3020; border-radius:12px; border:1px solid rgba(255,255,255,0.1);"></div>
           </div>
           <div class="slide-text-content">
             <div class="slide-tag" style="color:var(--lime)">КИТ №1</div>
@@ -424,7 +419,7 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
         <div class="slide-number">04</div>
         <div class="slide-content">
           <div>
-            <div style="background:url('slide4-img.jpg') center/cover; background-color:#0a1a30; min-height:220px; border-radius:14px; border:1px solid rgba(255,255,255,0.1);"></div>
+            <div style="background:url('3.2.jpeg') center/cover; background-color:#0a1a30; min-height:220px; border-radius:14px; border:1px solid rgba(255,255,255,0.1);"></div>
           </div>
           <div class="slide-text-content">
             <div class="slide-tag" style="color:#64B5F6">КИТ №2</div>
@@ -445,7 +440,7 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
         <div class="slide-number">05</div>
         <div class="slide-content">
           <div>
-            <div style="background:url('slide5-img.jpg') center/cover; background-color:#0a0a30; min-height:220px; border-radius:14px; border:1px solid rgba(255,255,255,0.1);"></div>
+            <div style="background:url('3.3.jpeg') center/cover; background-color:#0a0a30; min-height:220px; border-radius:14px; border:1px solid rgba(255,255,255,0.1);"></div>
           </div>
           <div class="slide-text-content">
             <div class="slide-tag" style="color:#CE93D8">КИТ №3</div>
@@ -500,7 +495,7 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
   <div class="sec-head">
     <div class="section-tag">Блок 6</div>
     <div class="section-title">ЗАКРЕПЛЕНИЕ</div>
-    <p style="color:rgba(255,255,255,0.45);font-size:13px;letter-spacing:2px;margin-top:8px;">«Выбери приоритет для города»</p>
+    <!-- <p style="color:rgba(255,255,255,0.45);font-size:13px;letter-spacing:2px;margin-top:8px;">«Выбери приоритет для города»</p> -->
   </div>
   <div class="block6-qr">
     <div class="qr-card">
@@ -522,24 +517,23 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
 
   <div class="b7-layout">
 
-    <!-- Колонка 1: QR + мини-график из GAS -->
+    <!-- Колонка 1: QR-панель (растянута как соседи) -->
     <div class="b7-qr-col">
-      <div class="b7-qr-card">
-        <div class="b7-qr-title">📱 РЕФЛЕКСИЯ<br>НА ТЕЛЕФОНЕ</div>
-        <div class="b7-qr-box"><img src="qr3.png" alt="QR Рефлексия"></div>
-        <div class="b7-qr-sub">→ reflection.html</div>
-        <a href="reflection.html" target="_blank" class="b7-qr-link">ОТКРЫТЬ</a>
-      </div>
-      <div class="b7-live-chart">
-        <div class="b7-live-title">📊 ОТВЕТЫ КЛАССА</div>
-        <div class="b7-live-wrap"><canvas id="liveChart"></canvas></div>
-        <button class="b7-refresh" onclick="loadLiveChart()">⟳ ОБНОВИТЬ</button>
-      </div>
+      <div class="b7-qr-title">📱 РЕФЛЕКСИЯ<br>НА ТЕЛЕФОНЕ</div>
+      <p style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:1px;text-align:center;">Студенты сканируют и заполняют форму со своего телефона</p>
+      <div class="b7-qr-box"><img src="qr3.png" alt="QR Рефлексия"></div>
+      <div class="b7-qr-sub">→ reflection.html</div>
+      <a href="reflection.html" target="_blank" class="b7-qr-link">ОТКРЫТЬ ФОРМУ</a>
     </div>
 
-    <!-- Колонка 2: КАК Я СЕБЯ ЧУВСТВУЮ (отправляет в GAS) -->
-    <div class="reflection-panel">
+    <!-- Колонка 2: КАК Я СЕБЯ ЧУВСТВУЮ (отправляет в GAS как учитель) -->
+    <div class="reflection-panel" style="display:flex;flex-direction:column;">
       <div class="ref-title">КАК Я СЕБЯ ЧУВСТВУЮ?</div>
+
+      <p style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:1px;margin-bottom:6px;">ТВОЁ ФИО</p>
+      <input type="text" id="teacherFio" placeholder="Фамилия Имя Отчество"
+        style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(118,255,3,0.2);border-radius:10px;padding:10px 14px;color:var(--text);font-family:'Montserrat',sans-serif;font-size:13px;outline:none;margin-bottom:16px;transition:border-color 0.2s;"
+        onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='rgba(118,255,3,0.2)'">
 
       <p style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:1px;margin-bottom:10px;">ВЫБЕРИ ЭМОЦИЮ</p>
       <div class="mood-grid">
@@ -569,23 +563,52 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
       <p style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:1px;margin-bottom:6px;">ЧТО ЗАПОМНИЛОСЬ?</p>
       <textarea class="ref-textarea" id="refNote" placeholder="Напиши мысль, идею или вопрос..."></textarea>
 
-      <div class="ref-actions">
+      <div class="ref-actions" style="margin-top:auto;padding-top:16px;">
         <button class="btn-save" onclick="saveReflection()">СОХРАНИТЬ</button>
         <button class="btn-reset" onclick="resetReflection()">СБРОСИТЬ</button>
         <span class="saved-msg" id="savedMsg">✓ СОХРАНЕНО</span>
       </div>
     </div>
 
-    <!-- Колонка 3: История + график -->
-    <div class="reflection-panel" style="display:flex;flex-direction:column;">
+    <!-- Колонка 3: МОЙ ПРОГРЕСС + данные из GAS -->
+    <div class="reflection-panel" style="display:flex;flex-direction:column;gap:0;">
+
       <div class="ref-title">МОЙ ПРОГРЕСС</div>
+
+      <!-- Личный график (localStorage) -->
+      <p style="font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:2px;margin-bottom:8px;">МОЁ ПОНИМАНИЕ ТЕМЫ</p>
       <div class="ref-chart-wrap"><canvas id="refChart"></canvas></div>
-      <div style="margin-top:18px;">
-        <p style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:2px;margin-bottom:10px;">ИСТОРИЯ СЕССИЙ</p>
+      <div style="margin-top:14px;margin-bottom:20px;">
+        <p style="font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:2px;margin-bottom:8px;">ИСТОРИЯ СЕССИЙ</p>
         <div class="history-list" id="historyList">
           <div style="font-size:12px;color:rgba(255,255,255,0.25);font-family:'Space Mono',monospace;font-style:italic;">Нет сохранённых данных</div>
         </div>
       </div>
+
+      <!-- Разделитель -->
+      <div style="border-top:1px solid rgba(118,255,3,0.12);margin-bottom:20px;"></div>
+
+      <!-- Данные из GAS (Лист 4) -->
+      <p style="font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:2px;margin-bottom:12px;">📊 ОТВЕТЫ КЛАССА (ИЗ ТАБЛИЦЫ)</p>
+
+      <!-- График эмоций -->
+      <div style="height:160px;position:relative;margin-bottom:16px;">
+        <canvas id="liveChart"></canvas>
+      </div>
+
+      <!-- Таблица студентов из Лист4 -->
+      <p style="font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:2px;margin-bottom:10px;">СПИСОК ОТВЕТОВ</p>
+      <div id="liveTable" style="max-height:200px;overflow-y:auto;">
+        <div style="font-size:11px;color:rgba(255,255,255,0.2);font-family:'Space Mono',monospace;font-style:italic;">Загрузка...</div>
+      </div>
+
+      <!-- Средний балл -->
+      <div id="liveAvg" style="margin-top:14px;padding:12px 16px;background:rgba(118,255,3,0.06);border:1px solid rgba(118,255,3,0.15);border-radius:10px;display:none;">
+        <span style="font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:2px;font-family:'Space Mono',monospace;">СРЕДНИЙ БАЛЛ КЛАССА</span>
+        <div id="liveAvgVal" style="font-family:'Bebas Neue',sans-serif;font-size:42px;color:var(--accent);line-height:1.1;">—</div>
+      </div>
+
+      <button class="b7-refresh" style="margin-top:14px;" onclick="loadLiveChart()">⟳ ОБНОВИТЬ ИЗ ТАБЛИЦЫ</button>
     </div>
 
   </div>
@@ -597,7 +620,7 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <script>
 // ============ GAS URL ============
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbxlpWQeXYdAhL0Gx6Nx3JEV3-pvJP4Qr40Iizz5dL5Ul6CfGIsnYiR5IdO6l_ncYb8S2g/exec';
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbzQTrp7W7b8NCSDDJnalcv5CcxZrwGVg9q_TZeWUS_oQQitncpolt7nKX11xYlGK3G7TQ/exec';
 
 // ---- JSONP helper — обходит CORS для GET-запросов к GAS ----
 function jsonp(url) {
@@ -752,18 +775,21 @@ function renderHistory(){
 }
 
 function saveReflection(){
+  const fio = (document.getElementById('teacherFio').value || '').trim() || '(без имени)';
   const score=parseInt(document.getElementById('understandSlider').value);
   const note=document.getElementById('refNote').value;
   const entry={date:new Date().toLocaleDateString('ru',{day:'2-digit',month:'2-digit'}),mood:refMood,stars:refStars,score,note};
   refHistory.push(entry);
   localStorage.setItem('ecoRefHistory',JSON.stringify(refHistory));
   buildChart(); renderHistory();
-  // Отправка в GAS (Лист 4)
+  // Отправка в GAS Лист 4 — тот же action что у студентов
   fetch(GAS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({action:'submitTeacherReflection',mood:refMood,stars:refStars,score,note,timestamp:new Date().toISOString()})
+    body:JSON.stringify({action:'submitStudentReflection',fio,mood:refMood,stars:refStars,score,note,timestamp:new Date().toISOString()})
   }).catch(()=>{});
   const msg=document.getElementById('savedMsg');
   msg.classList.add('show'); setTimeout(()=>msg.classList.remove('show'),2000);
+  // Обновляем правую панель через 1.5 сек
+  setTimeout(loadLiveChart, 1500);
 }
 
 function resetReflection(){
@@ -778,38 +804,87 @@ function resetReflection(){
   buildChart(); renderHistory();
 }
 
-// ============ LIVE CHART from GAS Sheet4 ============
+// ============ LIVE DATA from GAS Sheet4 ============
 let liveChart = null;
 async function loadLiveChart() {
+  const tableEl = document.getElementById('liveTable');
+  const avgEl   = document.getElementById('liveAvg');
+  const avgVal  = document.getElementById('liveAvgVal');
+  tableEl.innerHTML = '<div style="font-size:11px;color:rgba(255,255,255,0.25);font-family:\'Space Mono\',monospace;font-style:italic;">загрузка...</div>';
+
   try {
-    const raw = await jsonp(GAS_URL + '?action=getReflectionStats');
-    const data = Array.isArray(raw) ? raw : (raw.data || []);
+    // 1. Эмоции — getReflectionStats
+    const statsRaw = await jsonp(GAS_URL + '?action=getReflectionStats');
+    const stats = Array.isArray(statsRaw) ? statsRaw : (statsRaw.data || []);
+
     const ctx = document.getElementById('liveChart').getContext('2d');
     if (liveChart) liveChart.destroy();
-    if (!data.length) return;
-    const labels = data.map(d => d.mood || d.label || '');
-    const values = data.map(d => Number(d.count || d.value || 0));
-    liveChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels,
-        datasets: [{
-          label: 'Ответов',
-          data: values,
-          backgroundColor: ['rgba(118,255,3,0.55)','rgba(100,181,246,0.55)','rgba(206,147,216,0.55)','rgba(255,183,77,0.55)','rgba(255,107,53,0.55)'],
-          borderColor: 'transparent', borderRadius: 6
-        }]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
-        scales: {
-          x: { ticks: { color: 'rgba(255,255,255,0.5)', font: { size: 18 } }, grid: { display: false } },
-          y: { ticks: { color: 'rgba(255,255,255,0.3)', stepSize: 1 }, grid: { color: 'rgba(255,255,255,0.05)' } }
+    if (stats.length) {
+      const labels = stats.map(d => d.mood || '');
+      const values = stats.map(d => Number(d.count || 0));
+      liveChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{
+            data: values,
+            backgroundColor: ['rgba(118,255,3,0.6)','rgba(100,181,246,0.6)','rgba(206,147,216,0.6)','rgba(255,183,77,0.6)','rgba(255,107,53,0.6)'],
+            borderColor: 'transparent', borderRadius: 8
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { ticks: { color: 'rgba(255,255,255,0.6)', font: { size: 20 } }, grid: { display: false } },
+            y: { ticks: { color: 'rgba(255,255,255,0.3)', stepSize: 1, font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } }
+          }
         }
-      }
-    });
-  } catch(e) { console.log('Live chart error:', e); }
+      });
+    }
+
+    // 2. Список студентов + средний балл — getReflectionRows
+    const rowsRaw = await jsonp(GAS_URL + '?action=getReflectionRows');
+    const rows = Array.isArray(rowsRaw) ? rowsRaw : (rowsRaw.data || []);
+
+    if (!rows.length) {
+      tableEl.innerHTML = '<div style="font-size:11px;color:rgba(255,255,255,0.2);font-family:\'Space Mono\',monospace;font-style:italic;">Нет данных</div>';
+      return;
+    }
+
+    // Средний балл
+    const scores = rows.map(r => Number(r.score || 0)).filter(s => s > 0);
+    if (scores.length) {
+      const avg = Math.round(scores.reduce((a,b) => a+b, 0) / scores.length);
+      avgVal.textContent = avg + '%';
+      avgEl.style.display = 'block';
+    }
+
+    // Таблица
+    tableEl.innerHTML = `
+      <table style="width:100%;border-collapse:collapse;font-size:12px;">
+        <thead>
+          <tr style="border-bottom:1px solid rgba(118,255,3,0.2);">
+            <th style="text-align:left;padding:6px 8px;font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:1px;font-weight:400;">ФИО</th>
+            <th style="text-align:center;padding:6px 4px;font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:1px;font-weight:400;">ЭМОЦИЯ</th>
+            <th style="text-align:center;padding:6px 4px;font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:1px;font-weight:400;">★</th>
+            <th style="text-align:right;padding:6px 8px;font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:1px;font-weight:400;">%</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rows.map((r, i) => `
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.04);${i % 2 === 0 ? 'background:rgba(255,255,255,0.02);' : ''}">
+              <td style="padding:7px 8px;color:rgba(255,255,255,0.8);font-size:12px;">${r.fio || '—'}</td>
+              <td style="padding:7px 4px;text-align:center;font-size:16px;">${r.mood || '—'}</td>
+              <td style="padding:7px 4px;text-align:center;font-size:11px;color:#FFD700;">${'⭐'.repeat(Number(r.stars)||0)}</td>
+              <td style="padding:7px 8px;text-align:right;font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--accent);">${r.score || 0}%</td>
+            </tr>`).join('')}
+        </tbody>
+      </table>`;
+  } catch(e) {
+    tableEl.innerHTML = '<div style="font-size:11px;color:rgba(255,100,100,0.5);font-family:\'Space Mono\',monospace;">⚠ Ошибка загрузки. Проверь GAS_URL и редеплой.</div>';
+    console.log('Live data error:', e);
+  }
 }
 
 // Init
