@@ -24,7 +24,6 @@
     font-family: 'Bebas Neue', sans-serif;
     font-size: 13px; letter-spacing: 6px; color: var(--accent);
     margin-bottom: 32px; opacity: 0.8;
-    text-align: center;
   }
   .card {
     background: rgba(255,255,255,0.04);
@@ -44,8 +43,8 @@
     margin-bottom: 28px;
   }
   .fio-input {
-    width: 100%; background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.15);
+    width: 100%; background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,107,53,0.3);
     border-radius: 12px; padding: 14px 18px;
     color: var(--text); font-family: 'Montserrat', sans-serif;
     font-size: 16px; outline: none; transition: border-color 0.2s;
@@ -74,30 +73,17 @@
   }
   .options { display: flex; flex-direction: column; gap: 8px; }
   .opt-btn {
-    width: 100%; padding: 12px 16px;
+    width: 100%; padding: 11px 16px;
     border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);
     background: rgba(255,255,255,0.03);
     color: var(--text); font-family: 'Montserrat', sans-serif;
     font-size: 13px; text-align: left; cursor: pointer;
-    transition: all 0.2s; line-height: 1.4;
-    user-select: none; -webkit-user-select: none;
+    transition: all 0.2s;
   }
   .opt-btn:hover { border-color: var(--accent); background: rgba(255,107,53,0.08); }
   .opt-btn.selected { border-color: var(--accent); background: rgba(255,107,53,0.15); color: var(--accent); font-weight: 600; }
   .opt-btn.correct  { border-color: var(--green); background: rgba(118,255,3,0.12); color: var(--green); }
   .opt-btn.wrong    { border-color: rgba(255,80,80,0.5); background: rgba(255,80,80,0.1); color: #ff9090; }
-  
-  /* Блокировка интерактивности после ответа */
-  .options.disabled .opt-btn {
-    cursor: not-allowed;
-  }
-  .options.disabled .opt-btn:hover {
-    border-color: rgba(255,255,255,0.1);
-    background: rgba(255,255,255,0.03);
-  }
-  .options.disabled .opt-btn.correct { border-color: var(--green); background: rgba(118,255,3,0.12); }
-  .options.disabled .opt-btn.wrong { border-color: rgba(255,80,80,0.5); background: rgba(255,80,80,0.1); }
-
   .explain-box {
     margin-top: 12px; padding: 12px 14px;
     border-radius: 10px; font-size: 13px;
@@ -108,7 +94,6 @@
   .explain-wrong   { background: rgba(255,80,80,0.08); border: 1px solid rgba(255,80,80,0.2); color: #ff9090; }
   .progress-bar { width:100%; height:4px; background:rgba(255,255,255,0.06); border-radius:2px; margin-bottom:24px; overflow:hidden; }
   .progress-fill { height:100%; background:var(--accent); width:0%; transition:width 0.4s; border-radius:2px; }
-  
   .submit-btn {
     width: 100%; margin-top: 16px;
     background: var(--accent); color: #fff;
@@ -118,9 +103,10 @@
     cursor: pointer; transition: all 0.25s;
   }
   .submit-btn:hover { background: #ff8355; transform: translateY(-2px); }
-  .submit-btn:disabled { opacity: 0.25; cursor: not-allowed; transform: none; background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.3); border: 1px solid rgba(255,255,255,0.05); }
-  
-  .success-card { display: none; text-align: center; }
+  .submit-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+  .success-card {
+    display: none; text-align: center;
+  }
   .success-icon { font-size: 64px; margin-bottom: 16px; }
   .big-score {
     font-family: 'Bebas Neue', sans-serif;
@@ -135,15 +121,6 @@
     text-align: left;
   }
   .error-msg { color: #ff9090; font-size: 13px; margin-top: -16px; margin-bottom: 12px; display: none; }
-
-  /* Адаптивность для мобильных экранов */
-  @media (max-width: 480px) {
-    body { padding: 20px 12px; }
-    .card { padding: 20px 16px; border-radius: 18px; }
-    h1 { font-size: 32px; }
-    .opt-btn { padding: 12px 12px; font-size: 12.5px; }
-    .task-card { padding: 16px 12px; }
-  }
 </style>
 </head>
 <body>
@@ -161,8 +138,7 @@
   <div class="section-head">🏙️ ЗАДАНИЯ</div>
   <div id="tasksWrap"></div>
 
-  <!-- Кнопка изначально заблокирована, пока тест не пройден полностью -->
-  <button class="submit-btn" id="submitBtn" onclick="submitAll()" disabled>ОТПРАВИТЬ ОТВЕТЫ</button>
+  <button class="submit-btn" id="submitBtn" onclick="submitAll()">ОТПРАВИТЬ ОТВЕТЫ</button>
 </div>
 
 <div class="card success-card" id="successCard">
@@ -252,7 +228,7 @@ function renderTasks() {
     <div class="task-card" id="q-${q.id}">
       <div class="task-num">ВОПРОС ${q.id} · ${q.points} БАЛЛА</div>
       <div class="task-q">${q.text}</div>
-      <div class="options" id="options-${q.id}">
+      <div class="options">
         ${q.options.map((o,i) => `
           <button class="opt-btn" id="opt-${q.id}-${i}"
             onclick="selectOpt(${q.id}, ${i}, ${o.correct})">
@@ -267,47 +243,28 @@ function renderTasks() {
 }
 
 function selectOpt(qid, optIdx, isCorrect) {
-  if (answers[qid] !== undefined) return; // Защита от повторного клика
-  
+  if (answers[qid] !== undefined) return; // already answered
   answers[qid] = { optIdx, isCorrect };
   const q = questions.find(x => x.id === qid);
-  
-  // Визуально блокируем блок ответов, добавляя класс с cursor: not-allowed
-  document.getElementById(`options-${qid}`).classList.add('disabled');
-  
   q.options.forEach((o, i) => {
     const btn = document.getElementById(`opt-${qid}-${i}`);
-    if (i === optIdx) {
-      btn.classList.add(isCorrect ? 'correct' : 'wrong');
-    } else if (o.correct) {
-      btn.classList.add('correct'); // Подсвечиваем верный, если юзер ошибся
-    }
+    if (i === optIdx) btn.classList.add(isCorrect ? 'correct' : 'wrong');
+    else if (o.correct) btn.classList.add('correct');
   });
-  
   const expEl = document.getElementById(`exp-${qid}`);
   expEl.textContent = (isCorrect ? '✓ Верно! ' : '✗ Неверно. ') + q.explain;
   expEl.className = 'explain-box show ' + (isCorrect ? 'explain-correct' : 'explain-wrong');
-  
   updateProgress();
 }
 
 function updateProgress() {
   const c = Object.keys(answers).length;
   document.getElementById('progressFill').style.width = (c / questions.length * 100) + '%';
-  
-  // Кнопка разблокируется только тогда, когда пройдены ВСЕ задания
-  if (c === questions.length) {
-    document.getElementById('submitBtn').disabled = false;
-  }
 }
 
 function submitAll() {
   const fio = document.getElementById('fioInput').value.trim();
-  if (!fio) { 
-    document.getElementById('errMsg').style.display = 'block'; 
-    document.getElementById('fioInput').focus();
-    return; 
-  }
+  if (!fio) { document.getElementById('errMsg').style.display = 'block'; return; }
   document.getElementById('errMsg').style.display = 'none';
   document.getElementById('submitBtn').disabled = true;
   document.getElementById('submitBtn').textContent = 'ОТПРАВЛЯЮ...';
@@ -342,7 +299,6 @@ function submitAll() {
       <div style="color:rgba(255,255,255,0.5);">Суммарный балл → Лист 3 ✓</div>
     `;
     document.getElementById('successCard').style.display = 'block';
-    window.scrollTo(0, 0); // Прокрутка наверх, чтобы сразу увидеть результат
   }, 800);
 }
 
