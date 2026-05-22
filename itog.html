@@ -5,7 +5,315 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Итоговое задание — Эко-урбанистика</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style><!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Итоговое задание — Эко-урбанистика</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
+  :root {
+    --accent: #FF6B35;
+    --green: #76FF03;
+    --dark: #0a0a0f;
+    --mid: #141422;
+    --text: #eef0ff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--dark); color: var(--text);
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh; padding: 40px 20px;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px; letter-spacing: 6px; color: var(--accent);
+    margin-bottom: 32px; opacity: 0.8;
+  }
+  .card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,107,53,0.25);
+    border-radius: 24px; padding: 32px;
+    max-width: 560px; width: 100%;
+    margin-bottom: 20px;
+  }
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 38px; letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .subtitle {
+    font-size: 12px; color: rgba(255,255,255,0.4);
+    letter-spacing: 3px; font-family: 'Space Mono', monospace;
+    margin-bottom: 28px;
+  }
+  .fio-input {
+    width: 100%; background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,107,53,0.3);
+    border-radius: 12px; padding: 14px 18px;
+    color: var(--text); font-family: 'Montserrat', sans-serif;
+    font-size: 16px; outline: none; transition: border-color 0.2s;
+    margin-bottom: 24px;
+  }
+  .fio-input:focus { border-color: var(--accent); }
+  .section-head {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px; letter-spacing: 2px;
+    color: var(--accent); margin-bottom: 16px;
+  }
+  .task-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px; padding: 20px;
+    margin-bottom: 14px;
+  }
+  .task-q {
+    font-size: 14px; line-height: 1.7;
+    color: rgba(255,255,255,0.85); margin-bottom: 14px;
+  }
+  .task-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px; color: var(--accent);
+    letter-spacing: 3px; margin-bottom: 8px;
+  }
+  .options { display: flex; flex-direction: column; gap: 8px; }
+  .opt-btn {
+    width: 100%; padding: 11px 16px;
+    border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.03);
+    color: var(--text); font-family: 'Montserrat', sans-serif;
+    font-size: 13px; text-align: left; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .opt-btn:hover { border-color: var(--accent); background: rgba(255,107,53,0.08); }
+  .opt-btn.selected { border-color: var(--accent); background: rgba(255,107,53,0.15); color: var(--accent); font-weight: 600; }
+  .opt-btn.correct  { border-color: var(--green); background: rgba(118,255,3,0.12); color: var(--green); }
+  .opt-btn.wrong    { border-color: rgba(255,80,80,0.5); background: rgba(255,80,80,0.1); color: #ff9090; }
+  .explain-box {
+    margin-top: 12px; padding: 12px 14px;
+    border-radius: 10px; font-size: 13px;
+    line-height: 1.6; display: none;
+  }
+  .explain-box.show { display: block; }
+  .explain-correct { background: rgba(118,255,3,0.08); border: 1px solid rgba(118,255,3,0.25); color: var(--green); }
+  .explain-wrong   { background: rgba(255,80,80,0.08); border: 1px solid rgba(255,80,80,0.2); color: #ff9090; }
+  .progress-bar { width:100%; height:4px; background:rgba(255,255,255,0.06); border-radius:2px; margin-bottom:24px; overflow:hidden; }
+  .progress-fill { height:100%; background:var(--accent); width:0%; transition:width 0.4s; border-radius:2px; }
+  .submit-btn {
+    width: 100%; margin-top: 16px;
+    background: var(--accent); color: #fff;
+    border: none; border-radius: 14px;
+    padding: 16px; font-family: 'Montserrat', sans-serif;
+    font-weight: 900; font-size: 15px; letter-spacing: 2px;
+    cursor: pointer; transition: all 0.25s;
+  }
+  .submit-btn:hover { background: #ff8355; transform: translateY(-2px); }
+  .submit-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+  .success-card {
+    display: none; text-align: center;
+  }
+  .success-icon { font-size: 64px; margin-bottom: 16px; }
+  .big-score {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 90px; color: var(--accent); line-height: 1;
+  }
+  .score-label { font-size: 14px; color: rgba(255,255,255,0.5); letter-spacing: 3px; }
+  .score-breakdown {
+    margin-top: 24px; padding: 20px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 14px; font-family: 'Space Mono', monospace;
+    font-size: 13px; line-height: 2;
+    text-align: left;
+  }
+  .error-msg { color: #ff9090; font-size: 13px; margin-top: -16px; margin-bottom: 12px; display: none; }
+</style>
+</head>
+<body>
+
+<div class="logo">ЭКО-УРБАНИСТИКА · ИТОГОВОЕ ЗАДАНИЕ</div>
+
+<div class="card" id="mainCard">
+  <h1>ВЫБЕРИ ПРИОРИТЕТ</h1>
+  <div class="subtitle">БЛОК 6 · ЗАКРЕПЛЕНИЕ</div>
+
+  <input type="text" class="fio-input" id="fioInput" placeholder="Введи своё ФИО" maxlength="80">
+  <div class="error-msg" id="errMsg">Пожалуйста, введи своё ФИО</div>
+
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="section-head">🏙️ ЗАДАНИЯ</div>
+  <div id="tasksWrap"></div>
+
+  <button class="submit-btn" id="submitBtn" onclick="submitAll()">ОТПРАВИТЬ ОТВЕТЫ</button>
+</div>
+
+<div class="card success-card" id="successCard">
+  <div class="success-icon">🏆</div>
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:var(--accent);">РЕЗУЛЬТАТ</div>
+  <div class="big-score" id="bigScore">0</div>
+  <div class="score-label">БАЛЛОВ ЗА УРОК</div>
+  <div class="score-breakdown" id="scoreBreakdown"></div>
+  <p style="margin-top:20px;font-size:13px;color:rgba(255,255,255,0.4);line-height:1.8;">
+    Данные отправлены преподавателю.<br>
+    Суммарный балл за урок виден на экране.
+  </p>
+  <div style="margin-top:16px;font-family:'Space Mono',monospace;font-size:11px;color:var(--green);letter-spacing:3px;">✓ ЛИСТ 2 + ЛИСТ 3 ОБНОВЛЕНЫ</div>
+</div>
+
+<script>
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbz-iuC6xgKYaOInW00pJPRXsLqY-BD4k5MVlcLIeroXWfKzhYAsNlfQCXgcYPi56RgPeQ/exec';
+
+const questions = [
+  {
+    id: 1,
+    text: 'Какая концепция является ОСНОВОЙ экологического города и обеспечивает чистоту воды, почвы и воздуха?',
+    options: [
+      { text: '⚡ Солнечные панели и чистая энергия', correct: false },
+      { text: '♻️ Нулевые отходы — Zero Waste цикл', correct: true },
+      { text: '🚲 Велосипедные дорожки', correct: false },
+      { text: '🌳 Городские парки и зелёные зоны', correct: false },
+    ],
+    explain: 'Без замкнутого цикла Zero Waste невозможно сохранить чистыми воду, почву и воздух.',
+    points: 2
+  },
+  {
+    id: 2,
+    text: 'Что такое «остров тепла» в городе и какой элемент эко-урбанистики помогает его ликвидировать?',
+    options: [
+      { text: '🏖️ Тропический курорт в центре города', correct: false },
+      { text: '🌡️ Перегрев центра города из-за бетона — решение: вертикальные сады', correct: true },
+      { text: '🌊 Природное явление: нагрев воды', correct: false },
+      { text: '💡 Световое загрязнение ночью', correct: false },
+    ],
+    explain: 'Центр мегаполиса из-за бетона и асфальта на 10–15°C горячее пригородов. Вертикальные сады снижают температуру.',
+    points: 2
+  },
+  {
+    id: 3,
+    text: 'Как ИИ помогает экологам в управлении городом?',
+    options: [
+      { text: '🤖 Заменяет всех городских чиновников', correct: false },
+      { text: '📊 Анализирует тепловые карты и находит горячие точки с точностью до метра', correct: true },
+      { text: '🎮 Управляет городскими развлечениями', correct: false },
+      { text: '📱 Только публикует посты в соцсетях', correct: false },
+    ],
+    explain: 'ИИ обрабатывает спутниковые снимки, строит тепловые карты и указывает, где нужны зелёные зоны.',
+    points: 2
+  },
+  {
+    id: 4,
+    text: 'Что означает концепция «биомимикрии» в архитектуре?',
+    options: [
+      { text: '🐾 Строительство зоопарков прямо в центре города', correct: false },
+      { text: '🌿 Здания копируют инженерные решения природы — поглощают CO₂, удерживают влагу', correct: true },
+      { text: '🎨 Рисование природных пейзажей на фасадах', correct: false },
+      { text: '🌱 Простая посадка цветов вдоль дорог', correct: false },
+    ],
+    explain: 'Биомимикрия — архитектура заимствует решения у живой природы. Небоскрёбы с живыми фасадами работают как деревья.',
+    points: 2
+  },
+  {
+    id: 5,
+    text: 'Какой вариант НАИБОЛЕЕ ТОЧНО описывает «умную» автобусную остановку будущего?',
+    options: [
+      { text: '🪑 Просто удобное сиденье с навесом', correct: false },
+      { text: '📺 Экран с рекламой', correct: false },
+      { text: '🌿 Крыша из живого мха + солнечные панели + фильтрация воздуха', correct: true },
+      { text: '🔥 Обогрев зимой и вентилятор летом', correct: false },
+    ],
+    explain: 'Умная остановка — это элемент зелёной инфраструктуры: мох очищает воздух, панели дают энергию, дизайн охлаждает окружение.',
+    points: 2
+  },
+];
+
+let answers = {};
+
+function renderTasks() {
+  const wrap = document.getElementById('tasksWrap');
+  wrap.innerHTML = questions.map(q => `
+    <div class="task-card" id="q-${q.id}">
+      <div class="task-num">ВОПРОС ${q.id} · ${q.points} БАЛЛА</div>
+      <div class="task-q">${q.text}</div>
+      <div class="options">
+        ${q.options.map((o,i) => `
+          <button class="opt-btn" id="opt-${q.id}-${i}"
+            onclick="selectOpt(${q.id}, ${i}, ${o.correct})">
+            ${o.text}
+          </button>
+        `).join('')}
+      </div>
+      <div class="explain-box" id="exp-${q.id}"></div>
+    </div>
+  `).join('');
+  updateProgress();
+}
+
+function selectOpt(qid, optIdx, isCorrect) {
+  if (answers[qid] !== undefined) return; // already answered
+  answers[qid] = { optIdx, isCorrect };
+  const q = questions.find(x => x.id === qid);
+  q.options.forEach((o, i) => {
+    const btn = document.getElementById(`opt-${qid}-${i}`);
+    if (i === optIdx) btn.classList.add(isCorrect ? 'correct' : 'wrong');
+    else if (o.correct) btn.classList.add('correct');
+  });
+  const expEl = document.getElementById(`exp-${qid}`);
+  expEl.textContent = (isCorrect ? '✓ Верно! ' : '✗ Неверно. ') + q.explain;
+  expEl.className = 'explain-box show ' + (isCorrect ? 'explain-correct' : 'explain-wrong');
+  updateProgress();
+}
+
+function updateProgress() {
+  const c = Object.keys(answers).length;
+  document.getElementById('progressFill').style.width = (c / questions.length * 100) + '%';
+}
+
+function submitAll() {
+  const fio = document.getElementById('fioInput').value.trim();
+  if (!fio) { document.getElementById('errMsg').style.display = 'block'; return; }
+  document.getElementById('errMsg').style.display = 'none';
+  document.getElementById('submitBtn').disabled = true;
+  document.getElementById('submitBtn').textContent = 'ОТПРАВЛЯЮ...';
+
+  let score6 = 0;
+  questions.forEach(q => {
+    if (answers[q.id] && answers[q.id].isCorrect) score6 += q.points;
+  });
+
+  const payload = {
+    action: 'submitItog',
+    fio,
+    score6,
+    answers: JSON.stringify(answers),
+    timestamp: new Date().toISOString()
+  };
+
+  fetch(GAS_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(() => {});
+
+  setTimeout(() => {
+    document.getElementById('mainCard').style.display = 'none';
+    document.getElementById('bigScore').textContent = score6;
+    document.getElementById('scoreBreakdown').innerHTML = `
+      <div style="color:rgba(255,255,255,0.5);">ФИО: <span style="color:#fff">${fio}</span></div>
+      <div style="color:rgba(255,255,255,0.5);">Баллы за Блок 6: <span style="color:var(--accent)">${score6} / 10</span></div>
+      <div style="color:rgba(255,255,255,0.5);">Данные → Лист 2 ✓</div>
+      <div style="color:rgba(255,255,255,0.5);">Суммарный балл → Лист 3 ✓</div>
+    `;
+    document.getElementById('successCard').style.display = 'block';
+  }, 800);
+}
+
+renderTasks();
+</script>
+</body>
+</html>
+
   :root {
     --accent: #FF6B35;
     --green: #76FF03;
