@@ -18,22 +18,22 @@
 .pre-logo {
   font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(32px, 6vw, 56px); letter-spacing: 6px;
-  color: #76FF03; text-align: center; line-height: 1;
+  color: #B5FF4D; text-align: center; line-height: 1.2;
 }
-.pre-sub { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 4px; color: rgba(255,255,255,0.3); }
-.pre-bar-wrap { width: min(340px, 80vw); height: 3px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; }
-.pre-bar { height: 100%; width: 0%; background: #76FF03; border-radius: 2px; transition: width 0.4s ease; box-shadow: 0 0 12px #76FF03; }
-.pre-pct { font-family: 'Space Mono', monospace; font-size: 13px; color: #76FF03; letter-spacing: 2px; }
-
+.pre-sub { font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 4px; color: rgba(255,255,255,0.35); }
+.pre-bar-wrap { width: min(340px, 80vw); height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; }
+.pre-bar { height: 100%; width: 0%; background: #B5FF4D; border-radius: 2px; transition: width 0.4s ease; box-shadow: 0 0 14px #B5FF4D; }
+.pre-pct { font-family: 'Space Mono', monospace; font-size: 15px; color: #B5FF4D; letter-spacing: 2px; }
+ 
 :root {
-  --green: #4CAF50; --lime: #8BC34A; --dark: #0a0f0a;
-  --mid: #1a2a1a; --accent: #76FF03; --warm: #FF6B35;
-  --gold: #FFD700; --text: #e8f5e9;
+  --green: #4CAF50; --lime: #A5D63C; --dark: #0a0f0a;
+  --mid: #1a2a1a; --accent: #B5FF4D; --warm: #FF6B35;
+  --gold: #FFD700; --text: #f0ffe8;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { background: var(--dark); color: var(--text); font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
-
+body { background: var(--dark); color: var(--text); font-family: 'Montserrat', sans-serif; overflow-x: hidden; font-size: 16px; }
+ 
 /* ===== BLOCK 1 ===== */
 #block1 { width: 100vw; height: 100vh; display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden; }
 .video-panel { position: relative; overflow: hidden; }
@@ -51,7 +51,7 @@ body { background: var(--dark); color: var(--text); font-family: 'Montserrat', s
 .scroll-hint span { font-size: 11px; letter-spacing: 3px; color: var(--accent); }
 .scroll-hint svg { width: 24px; height: 24px; stroke: var(--accent); }
 @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
-
+ 
 /* ===== BLOCK 2 ===== */
 #block2 { width: 100vw; height: 100vh; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
 #block2 video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
@@ -67,12 +67,12 @@ body { background: var(--dark); color: var(--text); font-family: 'Montserrat', s
   from { text-shadow: 0 0 40px rgba(76,205,80,0.3); }
   to   { text-shadow: 0 0 80px rgba(76,205,80,0.7), 0 0 120px rgba(76,205,80,0.3); }
 }
-
+ 
 /* ===== COMMON SECTION ===== */
-.section-tag { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 6px; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; }
-.section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 7vw, 80px); letter-spacing: 2px; text-align: center; }
+.section-tag { font-family: 'Space Mono', monospace; font-size: 14px; letter-spacing: 6px; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
+.section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 8vw, 96px); letter-spacing: 2px; text-align: center; }
 .sec-head { text-align: center; margin-bottom: 20px; }
-
+ 
 /* ===== BLOCK 3 ===== */
 #block3 {
   min-height: 100vh; background: linear-gradient(180deg, var(--dark) 0%, #0d1f0d 100%);
@@ -87,88 +87,88 @@ body { background: var(--dark); color: var(--text); font-family: 'Montserrat', s
 }
 .qr-box { width: 160px; height: 160px; background: #fff; border-radius: 16px; display: flex; align-items: center; justify-content: center; padding: 8px; }
 .qr-box img { width: 100%; height: 100%; object-fit: contain; border-radius: 8px; }
-.qr-label { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 2px; color: var(--accent); text-align: center; }
-.qr-url { font-size: 11px; color: rgba(255,255,255,0.4); font-family: 'Space Mono', monospace; text-align: center; }
-.qr-open-btn { background: var(--accent); color: #000; padding: 10px 24px; border-radius: 8px; font-weight: 700; font-size: 13px; text-decoration: none; letter-spacing: 1px; transition: all 0.2s; }
-.qr-open-btn:hover { background: #9fff40; transform: translateY(-2px); }
+.qr-label { font-family: 'Space Mono', monospace; font-size: 15px; letter-spacing: 2px; color: var(--accent); text-align: center; }
+.qr-url { font-size: 13px; color: rgba(255,255,255,0.4); font-family: 'Space Mono', monospace; text-align: center; }
+.qr-open-btn { background: var(--accent); color: #000; padding: 12px 28px; border-radius: 8px; font-weight: 700; font-size: 15px; text-decoration: none; letter-spacing: 1px; transition: all 0.2s; }
+.qr-open-btn:hover { background: #cbff80; transform: translateY(-2px); }
 .leaderboard { flex: 1; min-width: 280px; max-width: 500px; }
-.leaderboard-title { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 2px; color: var(--accent); margin-bottom: 20px; }
+.leaderboard-title { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 2px; color: var(--accent); margin-bottom: 20px; }
 .podium-list { display: flex; flex-direction: column; gap: 12px; }
-.podium-item { display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(76,205,80,0.15); border-radius: 12px; padding: 14px 20px; }
+.podium-item { display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(181,255,77,0.15); border-radius: 12px; padding: 16px 20px; }
 .podium-item:nth-child(1) { border-color: rgba(255,215,0,0.5); background: rgba(255,215,0,0.05); }
 .podium-item:nth-child(2) { border-color: rgba(192,192,192,0.4); background: rgba(192,192,192,0.04); }
 .podium-item:nth-child(3) { border-color: rgba(205,127,50,0.4); background: rgba(205,127,50,0.04); }
-.rank-badge { font-family: 'Bebas Neue', sans-serif; font-size: 28px; min-width: 36px; }
+.rank-badge { font-family: 'Bebas Neue', sans-serif; font-size: 34px; min-width: 40px; }
 .podium-item:nth-child(1) .rank-badge { color: #FFD700; }
 .podium-item:nth-child(2) .rank-badge { color: #C0C0C0; }
 .podium-item:nth-child(3) .rank-badge { color: #CD7F32; }
-.student-name { font-weight: 600; font-size: 15px; flex: 1; }
-.student-score { font-family: 'Space Mono', monospace; font-size: 13px; color: var(--accent); }
-.empty-slot { font-size: 13px; color: rgba(255,255,255,0.25); font-family: 'Space Mono', monospace; font-style: italic; }
-.refresh-btn { margin-top: 16px; background: none; border: 1px solid rgba(76,205,80,0.3); color: var(--accent); padding: 8px 20px; border-radius: 8px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer; letter-spacing: 2px; transition: all 0.2s; }
-.refresh-btn:hover { background: rgba(76,205,80,0.1); }
-
+.student-name { font-weight: 600; font-size: 17px; flex: 1; }
+.student-score { font-family: 'Space Mono', monospace; font-size: 15px; color: var(--accent); }
+.empty-slot { font-size: 15px; color: rgba(255,255,255,0.25); font-family: 'Space Mono', monospace; font-style: italic; }
+.refresh-btn { margin-top: 16px; background: none; border: 1px solid rgba(181,255,77,0.3); color: var(--accent); padding: 10px 22px; border-radius: 8px; font-family: 'Space Mono', monospace; font-size: 13px; cursor: pointer; letter-spacing: 2px; transition: all 0.2s; }
+.refresh-btn:hover { background: rgba(181,255,77,0.1); }
+ 
 /* ===== BLOCK 4: THEORY ===== */
 #block4 { min-height: 100vh; background: var(--mid); position: relative; overflow: hidden; }
 .theory-header { text-align: center; padding: 60px 40px 40px; position: relative; z-index: 2; }
 .theory-slider { position: relative; overflow: hidden; width: 100%; }
 .theory-track { display: flex; transition: transform 0.6s cubic-bezier(0.4,0,0.2,1); }
-
+ 
 /* Slide базовый */
-.theory-slide { min-width: 100vw; min-height: 60vh; position: relative; display: flex; align-items: center; justify-content: center; padding: 60px clamp(20px, 5vw, 80px); }
+.theory-slide { min-width: 100vw; min-height: 70vh; position: relative; display: flex; align-items: center; justify-content: center; padding: 60px clamp(20px, 5vw, 80px); }
 .slide-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
-.slide-bg::after { content:''; position:absolute; inset:0; background: rgba(0,0,0,0.58); }
-
-/* Слайд 1 — три кита (обзорный) */
-.three-pillars { position: relative; z-index: 2; max-width: 1100px; width: 100%; }
-.pillars-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 6vw, 64px); letter-spacing: 3px; text-align: center; margin-bottom: 48px; }
-.pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.slide-bg::after { content:''; position:absolute; inset:0; background: rgba(0,0,0,0.52); }
+ 
+/* Слайд — три кита (обзорный) */
+.three-pillars { position: relative; z-index: 2; max-width: 1200px; width: 100%; }
+.pillars-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(42px, 6.5vw, 72px); letter-spacing: 3px; text-align: center; margin-bottom: 48px; }
+.pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
 .pillar-card {
-  background: rgba(255,255,255,0.05); border-radius: 20px; padding: 28px 20px;
+  background: rgba(255,255,255,0.07); border-radius: 20px; padding: 32px 24px;
   border-top: 3px solid; text-align: center;
-  display: flex; flex-direction: column; gap: 12px;
+  display: flex; flex-direction: column; gap: 14px;
 }
 .pillar-card:nth-child(1) { border-color: var(--accent); }
 .pillar-card:nth-child(2) { border-color: #64B5F6; }
 .pillar-card:nth-child(3) { border-color: #CE93D8; }
-.pillar-num { font-family: 'Bebas Neue', sans-serif; font-size: 42px; line-height: 1; }
+.pillar-num { font-family: 'Bebas Neue', sans-serif; font-size: 52px; line-height: 1; }
 .pillar-card:nth-child(1) .pillar-num { color: var(--accent); }
 .pillar-card:nth-child(2) .pillar-num { color: #64B5F6; }
 .pillar-card:nth-child(3) .pillar-num { color: #CE93D8; }
-.pillar-name { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; }
-.pillar-sub { font-size: 12px; color: rgba(255,255,255,0.45); font-family: 'Space Mono', monospace; letter-spacing: 1px; }
-.pillar-dots { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; text-align: left; }
-.pillar-dot { font-size: 13px; color: rgba(255,255,255,0.7); display: flex; gap: 8px; align-items: flex-start; line-height: 1.4; }
+.pillar-name { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 2px; }
+.pillar-sub { font-size: 15px; color: rgba(255,255,255,0.55); font-family: 'Space Mono', monospace; letter-spacing: 1px; }
+.pillar-dots { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; text-align: left; }
+.pillar-dot { font-size: 15px; color: rgba(255,255,255,0.82); display: flex; gap: 10px; align-items: flex-start; line-height: 1.4; }
 .pillar-dot::before { content: '•'; flex-shrink: 0; }
 .pillar-card:nth-child(1) .pillar-dot::before { color: var(--accent); }
 .pillar-card:nth-child(2) .pillar-dot::before { color: #64B5F6; }
 .pillar-card:nth-child(3) .pillar-dot::before { color: #CE93D8; }
-
-/* Слайды 2-4: стандартный layout */
-.slide-content { position: relative; z-index: 2; max-width: 960px; width: 100%; display: grid; grid-template-columns: 1fr 2fr; gap: 48px; align-items: center; }
+ 
+/* Слайды стандартный layout — картинка больше */
+.slide-content { position: relative; z-index: 2; max-width: 1100px; width: 100%; display: grid; grid-template-columns: 5fr 6fr; gap: 52px; align-items: center; }
 .slide-imgs { display: flex; flex-direction: column; gap: 10px; }
 .slide-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 14px; border: 1px solid rgba(255,255,255,0.1); }
-.slide-imgs-double { display: grid; grid-template-rows: 1fr 1fr; gap: 10px; height: 260px; }
+.slide-imgs-double { display: grid; grid-template-rows: 1fr 1fr; gap: 12px; height: 340px; }
 .slide-imgs-double .slide-img { height: 100%; width: 100%; }
-.slide-number { font-family: 'Bebas Neue', sans-serif; font-size: 120px; line-height: 1; color: rgba(255,255,255,0.05); position: absolute; right: 40px; top: -10px; pointer-events: none; }
-.slide-tag { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 4px; }
-.slide-heading { font-family: 'Bebas Neue', sans-serif; font-size: clamp(32px, 4.5vw, 52px); letter-spacing: 2px; line-height: 1; margin-bottom: 16px; }
-.slide-body { font-size: 14px; line-height: 1.75; color: rgba(255,255,255,0.78); font-weight: 300; }
-.slide-examples { margin-top: 20px; display: flex; flex-direction: column; gap: 9px; }
-.ex-item { display: flex; gap: 10px; align-items: flex-start; }
-.ex-dot { width: 6px; height: 6px; border-radius: 50%; margin-top: 7px; flex-shrink: 0; }
+.slide-number { font-family: 'Bebas Neue', sans-serif; font-size: 130px; line-height: 1; color: rgba(255,255,255,0.05); position: absolute; right: 40px; top: -10px; pointer-events: none; }
+.slide-tag { font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 6px; }
+.slide-heading { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 5vw, 60px); letter-spacing: 2px; line-height: 1; margin-bottom: 18px; }
+.slide-body { font-size: 16px; line-height: 1.8; color: rgba(255,255,255,0.88); font-weight: 300; }
+.slide-examples { margin-top: 22px; display: flex; flex-direction: column; gap: 12px; }
+.ex-item { display: flex; gap: 12px; align-items: flex-start; }
+.ex-dot { width: 7px; height: 7px; border-radius: 50%; margin-top: 8px; flex-shrink: 0; }
 .dot-green { background: var(--accent); }
 .dot-blue  { background: #64B5F6; }
 .dot-purple{ background: #CE93D8; }
-.ex-text { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.5; }
-
+.ex-text { font-size: 15px; color: rgba(255,255,255,0.78); line-height: 1.6; }
+ 
 .theory-nav { display: flex; align-items: center; justify-content: center; gap: 24px; padding: 36px; position: relative; z-index: 5; }
-.nav-btn { width: 52px; height: 52px; border-radius: 50%; border: 1px solid rgba(76,205,80,0.4); background: rgba(76,205,80,0.08); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; color: var(--accent); font-size: 22px; }
-.nav-btn:hover { background: rgba(76,205,80,0.2); border-color: var(--accent); }
+.nav-btn { width: 56px; height: 56px; border-radius: 50%; border: 1px solid rgba(181,255,77,0.4); background: rgba(181,255,77,0.08); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; color: var(--accent); font-size: 24px; }
+.nav-btn:hover { background: rgba(181,255,77,0.2); border-color: var(--accent); }
 .nav-dots { display: flex; gap: 8px; }
-.nav-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.2); cursor: pointer; transition: all 0.3s; }
-.nav-dot.active { background: var(--accent); width: 24px; border-radius: 4px; }
-
+.nav-dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.2); cursor: pointer; transition: all 0.3s; }
+.nav-dot.active { background: var(--accent); width: 28px; border-radius: 5px; }
+ 
 /* ===== BLOCK 5 ===== */
 #block5 { min-height: 100vh; background: #050d05; display: flex; flex-direction: column; align-items: center; padding: 80px 24px; }
 .map-container { width: 100%; max-width: 1200px; border-radius: 16px; overflow: hidden; border: 1px solid rgba(76,205,80,0.2); box-shadow: 0 0 60px rgba(0,0,0,0.5); }
@@ -180,15 +180,15 @@ body { background: var(--dark); color: var(--text); font-family: 'Montserrat', s
 .stat-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(76,205,80,0.15); border-radius: 16px; padding: 18px 24px; text-align: center; min-width: 140px; }
 .stat-val { font-family: 'Bebas Neue', sans-serif; font-size: 38px; color: var(--accent); }
 .stat-label { font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,0.4); font-family: 'Space Mono', monospace; text-transform: uppercase; }
-
+ 
 /* ===== BLOCK 6 ===== */
 #block6 { min-height: 60vh; background: linear-gradient(180deg, #050d05 0%, var(--mid) 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 40px; gap: 40px; }
 .block6-qr { display: flex; flex-direction: column; align-items: center; gap: 24px; }
-
+ 
 /* ===== BLOCK 7 ===== */
 #block7 { min-height: 100vh; background: linear-gradient(180deg, var(--mid) 0%, #000a00 100%); display: flex; flex-direction: column; align-items: center; padding: 80px 24px; gap: 40px; }
 .b7-layout { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1200px; width: 100%; align-items: stretch; }
-
+ 
 /* QR-колонка (левая) — теперь такая же панель как соседи */
 .b7-qr-col { background: rgba(255,255,255,0.03); border: 1px solid rgba(118,255,3,0.3); border-radius: 20px; padding: 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; }
 .b7-qr-title { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 2px; color: var(--accent); text-align: center; line-height: 1.1; }
@@ -199,7 +199,7 @@ body { background: var(--dark); color: var(--text); font-family: 'Montserrat', s
 .b7-qr-link:hover { background: #9fff40; transform: translateY(-2px); }
 .b7-refresh { margin-top: 10px; background: none; border: 1px solid rgba(76,205,80,0.25); color: var(--accent); padding: 8px 14px; border-radius: 8px; font-family: 'Space Mono', monospace; font-size: 10px; cursor: pointer; letter-spacing: 2px; transition: all 0.2s; width: 100%; }
 .b7-refresh:hover { background: rgba(76,205,80,0.08); }
-
+ 
 /* Панели рефлексии */
 .reflection-panel { background: rgba(255,255,255,0.03); border: 1px solid rgba(76,205,80,0.15); border-radius: 20px; padding: 28px; }
 .ref-title { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 2px; margin-bottom: 20px; color: var(--accent); }
@@ -228,10 +228,10 @@ canvas { width: 100% !important; }
 .history-item { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 12px; }
 .history-date { color: rgba(255,255,255,0.35); font-family: 'Space Mono', monospace; font-size: 10px; }
 .history-score { color: var(--accent); font-family: 'Bebas Neue', sans-serif; font-size: 18px; }
-
+ 
 /* FOOTER */
 footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.2); letter-spacing: 3px; border-top: 1px solid rgba(76,205,80,0.08); }
-
+ 
 /* ===== АДАПТИВ ===== */
 @media (max-width: 1024px) {
   .b7-layout { grid-template-columns: 1fr 1fr; }
@@ -259,15 +259,15 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
 </style>
 </head>
 <body>
-
+ 
 <!-- ===== PRELOADER ===== -->
 <div id="preloader">
-  <div class="pre-logo">ЭКО-<br>УРБАНИСТИКА</div>
-  <div class="pre-sub">ЗАГРУЗКА ПЛАТФОРМЫ</div>
+  <div class="pre-logo">⏳<br>ЗАГРУЗКА<br>САЙТА</div>
+  <div class="pre-sub">ПОДОЖДИТЕ, ПОЖАЛУЙСТА</div>
   <div class="pre-bar-wrap"><div class="pre-bar" id="preBar"></div></div>
   <div class="pre-pct" id="prePct">0%</div>
 </div>
-
+ 
 <!-- ===== BLOCK 1: HERO VIDEOS ===== -->
 <section id="block1">
   <div class="video-panel">
@@ -282,17 +282,21 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
     <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
   </div>
 </section>
-
+ 
 <!-- ===== BLOCK 2: THEME VIDEO ===== -->
 <section id="block2">
   <video src="2.mp4" autoplay loop muted playsinline></video>
   <div class="overlay"></div>
   <div class="theme-content">
     <div class="theme-title">ЭКО-<br>УРБАНИСТИКА</div>
-    <div class="theme-subtitle">город, в котором хочется жить</div>
+    <div class="theme-subtitle" style="display:flex;flex-direction:column;gap:10px;margin-top:28px;">
+      <span style="font-size:clamp(13px,1.8vw,20px);color:rgba(181,255,77,0.9);font-family:'Space Mono',monospace;letter-spacing:3px;">Экологиялық урбанистика</span>
+      <span style="font-size:clamp(13px,1.8vw,20px);color:rgba(255,255,255,0.8);font-weight:300;letter-spacing:3px;">Эко-урбанистика</span>
+      <span style="font-size:clamp(13px,1.8vw,20px);color:rgba(255,255,255,0.55);font-style:italic;letter-spacing:2px;">Ecological Urbanism</span>
+    </div>
   </div>
 </section>
-
+ 
 <!-- ===== BLOCK 3: ACTUALIZATION QR ===== -->
 <section id="block3">
   <div class="sec-head">
@@ -318,7 +322,7 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
     </div>
   </div>
 </section>
-
+ 
 <!-- ===== BLOCK 4: THEORY SLIDER ===== -->
 <section id="block4">
   <div class="theory-header">
@@ -327,14 +331,14 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
   </div>
   <div class="theory-slider">
     <div class="theory-track" id="theoryTrack">
-
+ 
       <!-- СЛАЙД 1: ЧТО ТАКОЕ ЭКО-УРБАНИСТИКА -->
       <div class="theory-slide">
         <div class="slide-bg" style="background:url('slide1-bg.jpg') center/cover; background-color:#0a2a12;"></div>
         <div class="slide-number">01</div>
         <div class="slide-content">
           <div>
-            <div class="slide-img" style="background:url('3.4.png') center/cover; background-color:#0a3a18; min-height:200px; border-radius:14px;"></div>
+            <div class="slide-img" style="background:url('slide1-img.jpg') center/cover; background-color:#0a3a18; min-height:320px; border-radius:14px;"></div>
           </div>
           <div class="slide-text-content">
             <div class="slide-tag" style="color:var(--accent)">ОСНОВА</div>
@@ -348,7 +352,7 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
           </div>
         </div>
       </div>
-
+ 
       <!-- СЛАЙД 2: 3 КИТА -->
       <div class="theory-slide">
         <div class="slide-bg" style="background:url('slide2-bg.jpg') center/cover; background-color:#0a1a2a;"></div>
@@ -389,7 +393,7 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
           </div>
         </div>
       </div>
-
+ 
       <!-- СЛАЙД 3: БИОМИМИКРИЯ (2 картины) -->
       <div class="theory-slide">
         <div class="slide-bg" style="background:url('slide3-bg.jpg') center/cover; background-color:#0a1a2a;"></div>
@@ -397,8 +401,8 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
         <div class="slide-content">
           <div class="slide-imgs-double">
             <!-- 🖼 Замени slide3-img1.jpg и slide3-img2.jpg на свои файлы -->
-            <div style="background:url('3.jpeg') center/cover; background-color:#0d2a3a; border-radius:12px; border:1px solid rgba(255,255,255,0.1);"></div>
-            <div style="background:url('3.1.jpeg') center/cover; background-color:#0a3020; border-radius:12px; border:1px solid rgba(255,255,255,0.1);"></div>
+            <div style="background:url('slide3-img1.jpg') center/cover; background-color:#0d2a3a; border-radius:12px; border:1px solid rgba(255,255,255,0.1);"></div>
+            <div style="background:url('slide3-img2.jpg') center/cover; background-color:#0a3020; border-radius:12px; border:1px solid rgba(255,255,255,0.1);"></div>
           </div>
           <div class="slide-text-content">
             <div class="slide-tag" style="color:var(--lime)">КИТ №1</div>
@@ -412,14 +416,14 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
           </div>
         </div>
       </div>
-
+ 
       <!-- СЛАЙД 4: ЦИКЛИЧНАЯ ЭКОНОМИКА -->
       <div class="theory-slide">
         <div class="slide-bg" style="background:url('slide4-bg.jpg') center/cover; background-color:#0a1a2a;"></div>
         <div class="slide-number">04</div>
         <div class="slide-content">
           <div>
-            <div style="background:url('3.2.jpeg') center/cover; background-color:#0a1a30; min-height:220px; border-radius:14px; border:1px solid rgba(255,255,255,0.1);"></div>
+            <div style="background:url('slide4-img.jpg') center/cover; background-color:#0a1a30; min-height:320px; border-radius:14px; border:1px solid rgba(255,255,255,0.1);"></div>
           </div>
           <div class="slide-text-content">
             <div class="slide-tag" style="color:#64B5F6">КИТ №2</div>
@@ -433,14 +437,14 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
           </div>
         </div>
       </div>
-
+ 
       <!-- СЛАЙД 5: УМНОЕ УПРАВЛЕНИЕ -->
       <div class="theory-slide">
         <div class="slide-bg" style="background:url('slide5-bg.jpg') center/cover; background-color:#0a0a2a;"></div>
         <div class="slide-number">05</div>
         <div class="slide-content">
           <div>
-            <div style="background:url('3.3.jpeg') center/cover; background-color:#0a0a30; min-height:220px; border-radius:14px; border:1px solid rgba(255,255,255,0.1);"></div>
+            <div style="background:url('slide5-img.jpg') center/cover; background-color:#0a0a30; min-height:320px; border-radius:14px; border:1px solid rgba(255,255,255,0.1);"></div>
           </div>
           <div class="slide-text-content">
             <div class="slide-tag" style="color:#CE93D8">КИТ №3</div>
@@ -454,7 +458,30 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
           </div>
         </div>
       </div>
-
+ 
+      <!-- СЛАЙД 6: ГОРОДА БУДУЩЕГО (новый — после тепловой карты) -->
+      <div class="theory-slide">
+        <div class="slide-bg" style="background:url('slide6-bg.jpg') center/cover; background-color:#0a1a0a;"></div>
+        <div class="slide-number">06</div>
+        <div class="slide-content">
+          <div>
+            <!-- 🖼 Замени slide6-img.jpg на свой файл -->
+            <div style="background:url('slide6-img.jpg') center/cover; background-color:#0a2a10; min-height:320px; border-radius:14px; border:1px solid rgba(255,255,255,0.12);"></div>
+          </div>
+          <div class="slide-text-content">
+            <div class="slide-tag" style="color:var(--accent)">ПРИМЕРЫ</div>
+            <div class="slide-heading" style="color:var(--accent)">ГОРОДА<br>БУДУЩЕГО<br><span style="font-size:clamp(14px,1.8vw,22px);color:rgba(255,255,255,0.4)">Лучшие практики</span></div>
+            <div class="slide-body">Реальные города уже сегодня внедряют принципы эко-урбанистики. <strong style="color:var(--accent)">Сингапур, Копенгаген, Масдар</strong> — лидеры зелёной революции, которые доказывают: устойчивый город возможен.</div>
+            <div class="slide-examples">
+              <div class="ex-item"><div class="ex-dot dot-green"></div><div class="ex-text"><strong>Сингапур</strong> — «Город в саду»: зелень на каждом здании, нулевые отходы</div></div>
+              <div class="ex-item"><div class="ex-dot dot-green"></div><div class="ex-text"><strong>Копенгаген</strong> — углеродная нейтральность к 2025 году, 62% жителей ездят на велосипеде</div></div>
+              <div class="ex-item"><div class="ex-dot dot-green"></div><div class="ex-text"><strong>Масдар (ОАЭ)</strong> — первый в мире безуглеродный город на солнечной энергии</div></div>
+              <div class="ex-item"><div class="ex-dot dot-green"></div><div class="ex-text"><strong>Астана</strong> — Smart City: умные остановки, IoT-датчики, зелёный пояс</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
     </div><!-- /theory-track -->
   </div>
   <div class="theory-nav">
@@ -463,7 +490,7 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
     <button class="nav-btn" onclick="changeSlide(1)">▶</button>
   </div>
 </section>
-
+ 
 <!-- ===== BLOCK 5: THERMAL MAP ===== -->
 <section id="block5">
   <div class="sec-head">
@@ -489,16 +516,16 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
     <div class="stat-card"><div class="stat-val">90%</div><div class="stat-label">Точность ИИ</div></div>
   </div>
 </section>
-
+ 
 <!-- ===== BLOCK 6: CONSOLIDATION QR ONLY ===== -->
 <section id="block6">
   <div class="sec-head">
     <div class="section-tag">Блок 6</div>
-    <div class="section-title">ЗАКРЕПЛЕНИЕ</div>
+    <div class="section-title">ПИТЧИНГ ИДЕЙ</div>
   </div>
-
+ 
   <div style="display:flex;gap:48px;align-items:flex-start;flex-wrap:wrap;justify-content:center;max-width:1100px;width:100%;">
-
+ 
     <!-- QR -->
     <div class="block6-qr">
       <div class="qr-card">
@@ -508,7 +535,7 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
         <a href="itog.html" target="_blank" style="background:var(--warm);color:#fff;padding:10px 24px;border-radius:8px;font-weight:700;font-size:13px;text-decoration:none;letter-spacing:1px;transition:all 0.2s;" onmouseover="this.style.background='#ff8355'" onmouseout="this.style.background='var(--warm)'">ОТКРЫТЬ ЗАДАНИЕ</a>
       </div>
     </div>
-
+ 
     <!-- Итоговая таблица Блок3 + Блок6 -->
     <div style="flex:1;min-width:320px;max-width:640px;">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
@@ -526,10 +553,10 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
         <div style="font-size:12px;color:rgba(255,255,255,0.25);font-family:'Space Mono',monospace;font-style:italic;padding:16px 8px;">Нажмите «Обновить» для загрузки...</div>
       </div>
     </div>
-
+ 
   </div>
 </section>
-
+ 
 <!-- ===== BLOCK 7: REFLECTION ===== -->
 <section id="block7">
   <div class="sec-head">
@@ -537,9 +564,9 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
     <div class="section-title">РЕФЛЕКСИЯ</div>
     <p style="color:rgba(255,255,255,0.4);font-size:12px;letter-spacing:2px;margin-top:8px;">Оцени урок — данные уходят преподавателю</p>
   </div>
-
+ 
   <div class="b7-layout">
-
+ 
     <!-- Колонка 1: QR-панель (растянута как соседи) -->
     <div class="b7-qr-col">
       <div class="b7-qr-title">📱 РЕФЛЕКСИЯ<br>НА ТЕЛЕФОНЕ</div>
@@ -548,16 +575,16 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
       <div class="b7-qr-sub">→ reflection.html</div>
       <a href="reflection.html" target="_blank" class="b7-qr-link">ОТКРЫТЬ ФОРМУ</a>
     </div>
-
+ 
     <!-- Колонка 2: КАК Я СЕБЯ ЧУВСТВУЮ (отправляет в GAS как учитель) -->
     <div class="reflection-panel" style="display:flex;flex-direction:column;">
       <div class="ref-title">КАК Я СЕБЯ ЧУВСТВУЮ?</div>
-
+ 
       <p style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:1px;margin-bottom:6px;">ТВОЁ ФИО</p>
       <input type="text" id="teacherFio" placeholder="Фамилия Имя Отчество"
         style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(118,255,3,0.2);border-radius:10px;padding:10px 14px;color:var(--text);font-family:'Montserrat',sans-serif;font-size:13px;outline:none;margin-bottom:16px;transition:border-color 0.2s;"
         onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='rgba(118,255,3,0.2)'">
-
+ 
       <p style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:1px;margin-bottom:10px;">ВЫБЕРИ ЭМОЦИЮ</p>
       <div class="mood-grid">
         <button class="mood-btn" data-mood="🤩" onclick="selectMood(this)" title="Восхищение">🤩</button>
@@ -566,7 +593,7 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
         <button class="mood-btn" data-mood="😕" onclick="selectMood(this)" title="Сложно">😕</button>
         <button class="mood-btn" data-mood="🤯" onclick="selectMood(this)" title="Перегрузка">🤯</button>
       </div>
-
+ 
       <p style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:1px;margin-bottom:8px;">ОЦЕНИ УРОК</p>
       <div class="stars-row" id="starsRow">
         <span class="star-btn" onclick="rateStar(1)">⭐</span>
@@ -575,29 +602,29 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
         <span class="star-btn" onclick="rateStar(4)">⭐</span>
         <span class="star-btn" onclick="rateStar(5)">⭐</span>
       </div>
-
+ 
       <p style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:1px;margin-bottom:4px;">НАСКОЛЬКО ПОНЯЛ ТЕМУ?</p>
       <div class="ref-slider-wrap">
         <div class="ref-slider-label"><span>0%</span><span id="sliderVal">70%</span><span>100%</span></div>
         <input type="range" class="ref-slider" id="understandSlider" min="0" max="100" value="70"
           oninput="document.getElementById('sliderVal').textContent=this.value+'%';this.style.setProperty('--pct',this.value+'%')">
       </div>
-
+ 
       <p style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:1px;margin-bottom:6px;">ЧТО ЗАПОМНИЛОСЬ?</p>
       <textarea class="ref-textarea" id="refNote" placeholder="Напиши мысль, идею или вопрос..."></textarea>
-
+ 
       <div class="ref-actions" style="margin-top:auto;padding-top:16px;">
         <button class="btn-save" onclick="saveReflection()">СОХРАНИТЬ</button>
         <button class="btn-reset" onclick="resetReflection()">СБРОСИТЬ</button>
         <span class="saved-msg" id="savedMsg">✓ СОХРАНЕНО</span>
       </div>
     </div>
-
+ 
     <!-- Колонка 3: МОЙ ПРОГРЕСС + данные из GAS -->
     <div class="reflection-panel" style="display:flex;flex-direction:column;gap:0;">
-
+ 
       <div class="ref-title">МОЙ ПРОГРЕСС</div>
-
+ 
       <!-- Личный график (localStorage) -->
       <p style="font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:2px;margin-bottom:8px;">МОЁ ПОНИМАНИЕ ТЕМЫ</p>
       <div class="ref-chart-wrap"><canvas id="refChart"></canvas></div>
@@ -607,44 +634,44 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
           <div style="font-size:12px;color:rgba(255,255,255,0.25);font-family:'Space Mono',monospace;font-style:italic;">Нет сохранённых данных</div>
         </div>
       </div>
-
+ 
       <!-- Разделитель -->
       <div style="border-top:1px solid rgba(118,255,3,0.12);margin-bottom:20px;"></div>
-
+ 
       <!-- Данные из GAS (Лист 4) -->
-      <p style="font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:2px;margin-bottom:12px;">📊 ОТВЕТЫ КЛАССА (ИЗ ТАБЛИЦЫ)</p>
-
+      <p style="font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:2px;margin-bottom:12px;">📊 ОТВЕТЫ ГРУППЫ (ИЗ ТАБЛИЦЫ)</p>
+ 
       <!-- График эмоций -->
       <div style="height:160px;position:relative;margin-bottom:16px;">
         <canvas id="liveChart"></canvas>
       </div>
-
+ 
       <!-- Таблица студентов из Лист4 -->
       <p style="font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:2px;margin-bottom:10px;">СПИСОК ОТВЕТОВ</p>
       <div id="liveTable" style="max-height:200px;overflow-y:auto;">
         <div style="font-size:11px;color:rgba(255,255,255,0.2);font-family:'Space Mono',monospace;font-style:italic;">Загрузка...</div>
       </div>
-
+ 
       <!-- Средний балл -->
-      <div id="liveAvg" style="margin-top:14px;padding:12px 16px;background:rgba(118,255,3,0.06);border:1px solid rgba(118,255,3,0.15);border-radius:10px;display:none;">
-        <span style="font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:2px;font-family:'Space Mono',monospace;">СРЕДНИЙ БАЛЛ КЛАССА</span>
+      <div id="liveAvg" style="margin-top:14px;padding:12px 16px;background:rgba(181,255,77,0.06);border:1px solid rgba(181,255,77,0.18);border-radius:10px;display:none;">
+        <span style="font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:2px;font-family:'Space Mono',monospace;">СРЕДНИЙ БАЛЛ ГРУППЫ</span>
         <div id="liveAvgVal" style="font-family:'Bebas Neue',sans-serif;font-size:42px;color:var(--accent);line-height:1.1;">—</div>
       </div>
-
+ 
       <button class="b7-refresh" style="margin-top:14px;" onclick="loadLiveChart()">⟳ ОБНОВИТЬ ИЗ ТАБЛИЦЫ</button>
     </div>
-
+ 
   </div>
 </section>
-
+ 
 <footer>ЭКО-УРБАНИСТИКА · УРОК 1 · АСТАНА 2025 · ИНТЕРАКТИВНАЯ ПЛАТФОРМА</footer>
-
+ 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <script>
 // ============ GAS URL ============
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbz-iuC6xgKYaOInW00pJPRXsLqY-BD4k5MVlcLIeroXWfKzhYAsNlfQCXgcYPi56RgPeQ/exec';
-
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbydk_9Ks0spHtkemP0AY-jBBrqQoQUYh9ISLD_27ubk5HPb49ktjFipFJlH7J9TGww-Zw/exec';
+ 
 // ---- JSONP helper — обходит CORS для GET-запросов к GAS ----
 function jsonp(url) {
   return new Promise((resolve, reject) => {
@@ -662,7 +689,7 @@ function jsonp(url) {
     document.head.appendChild(script);
   });
 }
-
+ 
 // ============ PRELOADER ============
 (function(){
   const bar = document.getElementById('preBar');
@@ -681,7 +708,7 @@ function jsonp(url) {
     setTimeout(() => document.getElementById('preloader').classList.add('hide'), 500);
   });
 })();
-
+ 
 // ============ BLOCK 3: PODIUM ============
 async function loadPodium3() {
   const el = document.getElementById('podium3');
@@ -704,10 +731,10 @@ async function loadPodium3() {
     el.innerHTML = '<div style="font-size:11px;color:rgba(255,100,100,0.6);font-family:\'Space Mono\',monospace;padding:8px;">⚠ Не удалось загрузить. Проверь GAS_URL</div>';
   }
 }
-
+ 
 // ============ BLOCK 4: THEORY SLIDER ============
 let currentSlide = 0;
-const totalSlides = 5;
+const totalSlides = 6;
 const track = document.getElementById('theoryTrack');
 const dotsC = document.getElementById('navDots');
 for (let i=0;i<totalSlides;i++){
@@ -726,7 +753,7 @@ function changeSlide(dir){goToSlide(currentSlide+dir);}
 let tsX=0;
 track.addEventListener('touchstart',e=>tsX=e.touches[0].clientX,{passive:true});
 track.addEventListener('touchend',e=>{const dx=tsX-e.changedTouches[0].clientX;if(Math.abs(dx)>50)changeSlide(dx>0?1:-1);},{passive:true});
-
+ 
 // ============ BLOCK 5: THERMAL MAP ============
 const leafMap = L.map('map',{zoomControl:true}).setView([51.18,71.45],12);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',opacity:0.6}).addTo(leafMap);
@@ -754,7 +781,7 @@ heatPoints.forEach(([lat,lng,temp,label])=>{
    .bindPopup(`<strong>${label}</strong><br>🌡️ ${temp}°C`).addTo(tLayer);
 });
 tLayer.addTo(leafMap);
-
+ 
 // ============ BLOCK 7: REFLECTION ============
 let refMood=null, refStars=0;
 function selectMood(btn){
@@ -765,10 +792,10 @@ function rateStar(n){
   refStars=n;
   document.querySelectorAll('.star-btn').forEach((s,i)=>s.classList.toggle('lit',i<n));
 }
-
+ 
 let refHistory=JSON.parse(localStorage.getItem('ecoRefHistory')||'[]');
 let refChart=null;
-
+ 
 function buildChart(){
   const ctx=document.getElementById('refChart').getContext('2d');
   const labels=refHistory.slice(-8).map(h=>h.date);
@@ -796,7 +823,7 @@ function renderHistory(){
       <span class="history-score">${h.score}%</span>
     </div>`).join('');
 }
-
+ 
 function saveReflection(){
   const fio = (document.getElementById('teacherFio').value || '').trim() || '(без имени)';
   const score=parseInt(document.getElementById('understandSlider').value);
@@ -814,7 +841,7 @@ function saveReflection(){
   // Обновляем правую панель через 1.5 сек
   setTimeout(loadLiveChart, 1500);
 }
-
+ 
 function resetReflection(){
   if(!confirm('Сбросить всю историю рефлексии?'))return;
   refHistory=[]; localStorage.removeItem('ecoRefHistory');
@@ -826,7 +853,7 @@ function resetReflection(){
   document.getElementById('refNote').value='';
   buildChart(); renderHistory();
 }
-
+ 
 // ============ LIVE DATA from GAS Sheet4 ============
 let liveChart = null;
 async function loadLiveChart() {
@@ -834,12 +861,12 @@ async function loadLiveChart() {
   const avgEl   = document.getElementById('liveAvg');
   const avgVal  = document.getElementById('liveAvgVal');
   tableEl.innerHTML = '<div style="font-size:11px;color:rgba(255,255,255,0.25);font-family:\'Space Mono\',monospace;font-style:italic;">загрузка...</div>';
-
+ 
   try {
     // 1. Эмоции — getReflectionStats
     const statsRaw = await jsonp(GAS_URL + '?action=getReflectionStats');
     const stats = Array.isArray(statsRaw) ? statsRaw : (statsRaw.data || []);
-
+ 
     const ctx = document.getElementById('liveChart').getContext('2d');
     if (liveChart) liveChart.destroy();
     if (stats.length) {
@@ -865,16 +892,16 @@ async function loadLiveChart() {
         }
       });
     }
-
+ 
     // 2. Список студентов + средний балл — getReflectionRows
     const rowsRaw = await jsonp(GAS_URL + '?action=getReflectionRows');
     const rows = Array.isArray(rowsRaw) ? rowsRaw : (rowsRaw.data || []);
-
+ 
     if (!rows.length) {
       tableEl.innerHTML = '<div style="font-size:11px;color:rgba(255,255,255,0.2);font-family:\'Space Mono\',monospace;font-style:italic;">Нет данных</div>';
       return;
     }
-
+ 
     // Средний балл
     const scores = rows.map(r => Number(r.score || 0)).filter(s => s > 0);
     if (scores.length) {
@@ -882,7 +909,7 @@ async function loadLiveChart() {
       avgVal.textContent = avg + '%';
       avgEl.style.display = 'block';
     }
-
+ 
     // Таблица
     tableEl.innerHTML = `
       <table style="width:100%;border-collapse:collapse;font-size:12px;">
@@ -909,7 +936,7 @@ async function loadLiveChart() {
     console.log('Live data error:', e);
   }
 }
-
+ 
 // ============ BLOCK 6: ИТОГОВЫЙ РЕЙТИНГ (Блок3 + Блок6) ============
 async function loadBlock6Board() {
   const el = document.getElementById('block6Board');
@@ -946,7 +973,7 @@ async function loadBlock6Board() {
     console.log('Block6 board error:', e);
   }
 }
-
+ 
 // Init
 buildChart(); renderHistory(); loadPodium3(); loadLiveChart(); loadBlock6Board();
 </script>
