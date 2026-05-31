@@ -636,25 +636,24 @@ footer { text-align: center; padding: 28px; font-family: 'Space Mono', monospace
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <script>
-const GAS_URL = 'https://script.google.com/macros/s/AKfycby_L8EN2xlDPlt5c-ZgT1XsxLEyZSYwuWdup9I5SnvhV2OjfRihNGVH88G5-IH8KvaBmg/exec';
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbznXKmo5elrzxrGz-TOGIqxypz6RifIcWgzhcj8J6odRztlK2bD2pVmVXoQMI83vvhHew/exec';
 
-// ---- JSONP: единственный способ обойти CORS у GAS ----
-function jsonp(url) {
-  return new Promise((resolve, reject) => {
-    const cbName = '_cb_' + Math.random().toString(36).slice(2);
-    const script = document.createElement('script');
-    const timer = setTimeout(() => { cleanup(); reject(new Error('timeout')); }, 10000);
-    function cleanup() {
-      clearTimeout(timer);
-      delete window[cbName];
-      if (script.parentNode) script.parentNode.removeChild(script);
-    }
-    window[cbName] = (data) => { cleanup(); resolve(data); };
-    // Параметр callback передаётся в GAS, GAS оборачивает ответ в имя функции
-    script.src = url + (url.includes('?') ? '&' : '?') + 'callback=' + cbName;
-    script.onerror = () => { cleanup(); reject(new Error('script error')); };
-    document.head.appendChild(script);
+// ─── Чтение данных из GAS ───────────────────────────────────────────────
+// GitHub Pages требует fetch с redirect:'follow' + mode:'cors'
+// GAS должен возвращать заголовок Access-Control-Allow-Origin: *
+async function gasGet(action) {
+  const url = GAS_URL + '?action=' + action;
+  const res = await fetch(url, {
+    method: 'GET',
+    redirect: 'follow',
+    mode: 'cors',
+    headers: { 'Content-Type': 'text/plain' }
   });
+  if (!res.ok) throw new Error('HTTP ' + res.status);
+  const text = await res.text();
+  // GAS иногда оборачивает в callback(data) если попал старый деплой
+  const json = text.trim().replace(/^[^([{]+\(/, '').replace(/\);?\s*$/, '');
+  return JSON.parse(json || text);
 }
 
 // ============ PRELOADER ============
@@ -681,7 +680,7 @@ async function loadPodium3() {
   const el = document.getElementById('podium3');
   el.innerHTML = '<div style="font-size:13px;color:rgba(255,255,255,0.3);font-family:\'Space Mono\',monospace;padding:10px;">загрузка...</div>';
   try {
-    const data = await jsonp(GAS_URL + '?action=getTop3');
+    const data = await gasGet('getTop3');
     const arr = Array.isArray(data) ? data : (data.data || []);
     if (!arr.length) {
       el.innerHTML = ['1','2','3'].map(n=>`<div class="podium-item"><span class="rank-badge">${n}</span><span class="student-name empty-slot">— ожидание студентов —</span></div>`).join('');
@@ -818,7 +817,7 @@ async function loadLiveChart(){
   tableEl.innerHTML='<div style="font-size:12px;color:rgba(255,255,255,0.25);font-family:\'Space Mono\',monospace;font-style:italic;padding:8px;">загрузка...</div>';
   try {
     // График эмоций
-    const statsRaw=await jsonp(GAS_URL+'?action=getReflectionStats');
+    const statsRaw=await gasGet('getReflectionStats');
     const stats=Array.isArray(statsRaw)?statsRaw:(statsRaw.data||[]);
     const ctx=document.getElementById('liveChart').getContext('2d');
     if(liveChart)liveChart.destroy();
@@ -834,7 +833,7 @@ async function loadLiveChart(){
       });
     }
     // Таблица студентов
-    const rowsRaw=await jsonp(GAS_URL+'?action=getReflectionRows');
+    const rowsRaw=await gasGet('getReflectionRows');
     const rows=Array.isArray(rowsRaw)?rowsRaw:(rowsRaw.data||[]);
     if(!rows.length){
       tableEl.innerHTML='<div style="font-size:12px;color:rgba(255,255,255,0.2);font-family:\'Space Mono\',monospace;font-style:italic;padding:8px;">Нет данных — студенты ещё не заполнили рефлексию</div>';
@@ -871,7 +870,7 @@ async function loadBlock6Board(){
   const el=document.getElementById('block6Board');
   el.innerHTML='<div style="font-size:13px;color:rgba(255,255,255,0.3);font-family:\'Space Mono\',monospace;padding:12px 8px;">загрузка...</div>';
   try{
-    const raw=await jsonp(GAS_URL+'?action=getBlock6Leaderboard');
+    const raw=await gasGet('getBlock6Leaderboard');
     const rows=Array.isArray(raw)?raw:(raw.data||[]);
     if(!rows.length){
       el.innerHTML='<div style="font-size:13px;color:rgba(255,255,255,0.25);font-family:\'Space Mono\',monospace;font-style:italic;padding:12px 8px;">Пока нет данных — ждём ответов студентов</div>';
